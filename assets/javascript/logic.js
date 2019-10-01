@@ -191,12 +191,12 @@
 var search = "chicken"
 var queryUrl = "https://api.edamam.com/search?q=" + search + "&app_id=$42a05216&app_key=$ddaf66796324f3322e79ef209fccf704"
 
-$.ajax({
-    url: queryUrl,
-    method: "GET"
-}).then(function(response){
-    console.log(response);
-});
+//$.ajax({
+  //  url: queryUrl,
+   // method: "GET"
+//}).then(function(response){
+  //  console.log(response);
+//});
 
 
 // API Key
