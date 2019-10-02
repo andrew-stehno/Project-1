@@ -187,9 +187,38 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+// Document.ready
+$(document).ready(function(){
+  $('select').formSelect();
+});
+
+
+
+
 // create search var
-var search = "chicken"
+
+$(document).on("click", ".keywordSearch", function(){
+var search = $('.keyWord').val().trim();
 var queryUrl = "https://api.edamam.com/search?q=" + search + "&app_id=$42a05216&app_key=$ddaf66796324f3322e79ef209fccf704"
+  console.log("clicked");
+  console.log(search);
+
+
+  // reset search bar 
+  $(".keyWord").val("");
+})
+
+
 
 //$.ajax({
   //  url: queryUrl,
