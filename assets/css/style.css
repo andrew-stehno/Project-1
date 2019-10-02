@@ -1,0 +1,25 @@
+.clearfix::after {
+  content: " ";
+  display: block;
+  clear: both;
+}
+
+main {
+  float: left;
+}
+
+aside {
+  float: left;
+}
+
+footer {
+  position: relative;
+  left: 0;
+  bottom:  0;
+  width: 100%;
+  color: white;
+  background-color: lightslategrey;
+  padding: 20px;
+  text-align: center;
+ 
+}
