@@ -24,7 +24,7 @@ As the family meal planner, I want be able to search and save recipies, to make 
   1.  As head cook, I need easy access to meal options.
     *  User must be able to store recipies to their favorites file.
 
--User Profile:  As a meal planner I want to be able to log in to my account and access my stored recipies on        different devices.
+-User Profile:  As a meal planner I want to be able to log in to my account and access my stored recipies on different devices.
   1. As the primary grocery shopper, I need acess to my saved recipies.
     *  User must be able to sign in to their own account.
   2. As the primary grocery shopper, I need access to my shopping list.
