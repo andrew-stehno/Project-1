@@ -1,10 +1,14 @@
-.sidenav {
-    background-color: #38BC1C;
+.ourBar {
+    width: 25%;
+    background-color: blue;
 }
 
 .carousel {
-    background-color: #38BC1C;
-    
+    background-image: url(../images/background-2277_1920.jpg);
+    background-size: cover;
+    opacity: .5;
 }
 
-
+.carousel-item {
+    opacity: 0;
+}
