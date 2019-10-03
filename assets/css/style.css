@@ -3,6 +3,10 @@
     background-color: blue;
 }
 
+#nav-title {
+    color:tomato;
+}
+
 .carousel {
     background-image: url(../images/background-2277_1920.jpg);
     background-size: cover;
