@@ -190,7 +190,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 // Document.ready
-$(document).ready(function(){
+$(document).ready(function () {
   $('select').formSelect();
   $('.carousel').carousel();
   $('.sidenav').sidenav();
@@ -201,9 +201,9 @@ $(document).ready(function(){
 
 // create search var
 
-$(document).on("click", ".keywordSearch", function(){
-var search = $('.keyWord').val().trim();
-var queryUrl = "https://api.edamam.com/search?q=" + search + "&app_id=$42a05216&app_key=$ddaf66796324f3322e79ef209fccf704"
+$(document).on("click", ".keywordSearch", function () {
+  var search = $('.keyWord').val().trim();
+  var queryUrl = "https://api.edamam.com/search?q=" + search + "&app_id=$42a05216&app_key=$ddaf66796324f3322e79ef209fccf704"
   console.log("clicked");
   console.log(search);
 
@@ -214,25 +214,30 @@ var queryUrl = "https://api.edamam.com/search?q=" + search + "&app_id=$42a05216&
 
 
 
-$.ajax({
-   url: queryUrl,
-   method: "GET"
-}).then(function(response){
-   console.log(response);
+  $.ajax({
+    url: queryUrl,
+    method: "GET"
+  }).then(function (response) {
+    console.log(response);
 
-  //  response variable:
-const data = response.hits;
+    //  response variable:
+    const data = response.hits;
 
-// Iterate through ingredients:
-// ***Need click function associated with recipe index to
-// ***assign #1-10 for data[x] below.  Assigned as 1 for testing.
-  for (let j = 0; j < data[1].recipe.ingredients.length; j++) {
-    let ingrd = data[1].recipe.ingredients[j].food;
-    console.log(ingrd);
-  }
+    // Iterate through ingredients:
+    // ***Need click function associated with recipe index to
+    // ***assign #1-10 for data[x] below.  Assigned as 1 for testing.
+    for (let j = 0; j < data[1].recipe.ingredients.length; j++) {
+      let ingrd = data[1].recipe.ingredients[j].food;
+      console.log(ingrd);
+    }
 
+    let form = $('<form>');
+    let label = $('<label>');
+    let input = $('<input>').attr('type', 'checkbox').text(ingrd);
+    label.append$(input);
+    form.append$(label);
 
-});
+  });
 
 });
 // API Key
