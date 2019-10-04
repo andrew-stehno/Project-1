@@ -196,16 +196,31 @@ $(document).ready(function(){
   $('.sidenav').sidenav();
 });
 
+// makinf Array to hold dropdown menu items and looping through to dynamically create the options. 
+var optionsArr = ["Balanced", "Gluten-free", "Vegetarian", "Keto", "Paleo", "Vegan", "Pescetarian", "Dairy-free"]
 
+for (let i = 0; i < optionsArr.length; i++) {
+  // test loop
+  console.log(optionsArr[i]);
+  // var that holds new options
+  var newOpt = $('<option>')
+
+  newOpt.text(optionsArr[i]);
+
+  $('.optionsField').append(newOpt);
+
+};
 
 
 // create search var
 
 $(document).on("click", ".keywordSearch", function(){
 var search = $('.keyWord').val().trim();
-var queryUrl = "https://api.edamam.com/search?q=" + search + "&app_id=$42a05216&app_key=$ddaf66796324f3322e79ef209fccf704"
+var dietParam = $('.dietParamSelector').val();
+var queryUrl = "https://api.edamam.com/search?q=" + search + "&health=" + dietParam + "&app_id=$42a05216&app_key=$ddaf66796324f3322e79ef209fccf704&from=0&to=10"
   console.log("clicked");
   console.log(search);
+  console.log(dietParam);
 
 
   // reset search bar 
@@ -213,6 +228,8 @@ var queryUrl = "https://api.edamam.com/search?q=" + search + "&app_id=$42a05216&
 
 
 
+<<<<<<< HEAD
+=======
 
 $.ajax({
    url: queryUrl,
@@ -230,7 +247,15 @@ const data = response.hits;
     let ingrd = data[1].recipe.ingredients[j].food;
     console.log(ingrd);
   }
+>>>>>>> development
 
+$.ajax({
+   url: queryUrl,
+   method: "GET"
+}).then(function(response){
+   console.log(response);
+});
+});
 
 });
 
