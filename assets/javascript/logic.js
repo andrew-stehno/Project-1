@@ -210,18 +210,31 @@ var queryUrl = "https://api.edamam.com/search?q=" + search + "&app_id=$42a05216&
 
   // reset search bar 
   $(".keyWord").val("");
+
+
+
+
+$.ajax({
+   url: queryUrl,
+   method: "GET"
+}).then(function(response){
+   console.log(response);
+
+  //  response variable:
+const data = response.hits;
+
+// Iterate through ingredients:
+// ***Need click function associated with recipe index to
+// ***assign #1-10 for data[x] below.  Assigned as 1 for testing.
+  for (let j = 0; j < data[1].recipe.ingredients.length; j++) {
+    let ingrd = data[1].recipe.ingredients[j].food;
+    console.log(ingrd);
+  }
+
+
 });
 
-
-
-//$.ajax({
-  //  url: queryUrl,
-   // method: "GET"
-//}).then(function(response){
-  //  console.log(response);
-//});
-
-
+});
 // API Key
 // https: //api.edamam.com/search?q=chicken?
 //     // ddaf66796324f3322e79ef209fccf704
