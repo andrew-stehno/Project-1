@@ -190,7 +190,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 // Document.ready
-$(document).ready(function(){
+$(document).ready(function () {
   $('select').formSelect();
   $('.carousel').carousel();
   $('.sidenav').sidenav();
@@ -214,10 +214,10 @@ for (let i = 0; i < optionsArr.length; i++) {
 
 // create search var
 
-$(document).on("click", ".keywordSearch", function(){
-var search = $('.keyWord').val().trim();
-var dietParam = $('.dietParamSelector').val();
-var queryUrl = "https://api.edamam.com/search?q=" + search + "&health=" + dietParam + "&app_id=$42a05216&app_key=$ddaf66796324f3322e79ef209fccf704&from=0&to=10"
+$(document).on("click", ".keywordSearch", function () {
+  var search = $('.keyWord').val().trim();
+  var dietParam = $('.dietParamSelector').val();
+  var queryUrl = "https://api.edamam.com/search?q=" + search + "&app_id=$42a05216&app_key=$ddaf66796324f3322e79ef209fccf704&from=0&to=12"
   console.log("clicked");
   console.log(search);
   console.log(dietParam);
@@ -228,41 +228,62 @@ var queryUrl = "https://api.edamam.com/search?q=" + search + "&health=" + dietPa
 
 
 
-<<<<<<< HEAD
-=======
+  // ajax Call
+  $.ajax({
+    url: queryUrl,
+    method: "GET"
+  }).then(function (response) {
+    console.log(response);
 
-$.ajax({
-   url: queryUrl,
-   method: "GET"
-}).then(function(response){
-   console.log(response);
+    //  response variable:
+    const data = response.hits;
+    // console.log(data[1].recipe.image)
+    // Iterate through ingredients:
+    // ***Need click function associated with recipe index to
+    // ***assign #1-10 for data[x] below.  Assigned as 1 for testing.
+    for (let j = 0; j < data[j].recipe.ingredients.length; j++) {
+      // let ingrd = data[1].recipe.ingredients[j].food;
+      let url = data[j].recipe.url
+      console.log(url);
+    }
+    // Function to render cards, placed in ajax call for scoping. 
+    function renderCards() {
+      for (var i = 0; i < data.length; i++) {
+        var recipeURL = data[i].recipe.url
+        console.log(recipeURL);
+        var div = $('<div>').addClass('card');
+        var title = $('<div>').addClass('card-title');
+        // append .card-content to .card
+        var newDiv = $('<div>').addClass('card-content');
+        // append img to card-content
+        var img = $('<img src=" ' + data[i].recipe.image + ' " alt="Food Image">');
+        var tabs = $('<div>').addClass('card-tabs')
+        var tabsUl = $('<ul class="tabs tabs-fixed-width">');
+        var tabsList = $('<li class="tab">').add('<a>').attr('href', "google.com").text("hello")
+        var content = $('<p>').text(data[i].recipe.label);
+        
+        
+        tabsUl.append(tabsList)
+        newDiv.append(tabsUl)
+        title.append(content)
+        div.append(img)
+        div.append(title)
+        div.append(newDiv)
 
-  //  response variable:
-const data = response.hits;
+        $('.cardArea').prepend(div);
 
-// Iterate through ingredients:
-// ***Need click function associated with recipe index to
-// ***assign #1-10 for data[x] below.  Assigned as 1 for testing.
-  for (let j = 0; j < data[1].recipe.ingredients.length; j++) {
-    let ingrd = data[1].recipe.ingredients[j].food;
-    console.log(ingrd);
-  }
->>>>>>> development
+      }
+    }
 
-$.ajax({
-   url: queryUrl,
-   method: "GET"
-}).then(function(response){
-   console.log(response);
+    renderCards();
+  });
 });
-});
 
-});
 
-});
 // API Key
 // https: //api.edamam.com/search?q=chicken?
 //     // ddaf66796324f3322e79ef209fccf704
 
 // Example API Search URL
 // "https://api.edamam.com/search?q=chicken&app_id=${42a05216}&app_key=${ddaf66796324f3322e79ef209fccf704}&from=0&to=1&calories=591-722&health=alcohol-free"
+// + "&health=" + dietParam
