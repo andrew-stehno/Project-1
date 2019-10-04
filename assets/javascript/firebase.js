@@ -1,15 +1,4 @@
-// Fire base configuration:
-var firebaseConfig = {
-  apiKey: "AIzaSyB_Iiy1X9SVcL0OD_NrA7zXwow1jxYFrAY",
-  authDomain: "project-1-254602.firebaseapp.com",
-  databaseURL: "https://project-1-254602.firebaseio.com",
-  projectId: "project-1-254602",
-  storageBucket: "",
-  messagingSenderId: "678978913542",
-  appId: "1:678978913542:web:4e7bb8259d61970316ca87"
-};
-  // Initialize Firebase:
-  firebase.initializeApp(firebaseConfig);
+
   
   const auth = firebase.auth();
   const database = firebase.database();

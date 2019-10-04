@@ -228,14 +228,101 @@ $(document).on("click", ".keywordSearch", function () {
     // ***assign #1-10 for data[x] below.  Assigned as 1 for testing.
     for (let j = 0; j < data[1].recipe.ingredients.length; j++) {
       let ingrd = data[1].recipe.ingredients[j].food;
-      console.log(ingrd);
-    }
 
-    let form = $('<form>');
-    let label = $('<label>');
-    let input = $('<input>').attr('type', 'checkbox').text(ingrd);
-    label.append$(input);
-    form.append$(label);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+      let recipes;
+
+      // Click listener to display ingredients to DOM:
+      // $('.keyWordSearch').on(click, function (event) {
+
+      // })
+
+      // Click listener to send data to Firebase:
+      $('#ingrd-btn').on('click', function (event) {
+        event.preventDefault();
+
+        // Store API data in object:
+        let newData = {
+          ingredients: [ingrd]
+        }
+
+        // Upload data to Firebase database:
+        database.ref().set(newData);
+      })
+    }
+    // let form = $('<form>');
+    // let label = $('<label>');
+    // let input = $('<input>').attr('type', 'checkbox').text(ingrd);
+    // label.append$(input);
+    // form.append$(label);
 
   });
 

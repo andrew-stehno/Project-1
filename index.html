@@ -17,7 +17,8 @@
     <nav class="top-nav z-depth-0 grey lighten-4">
 
         <div class="nav-wrapper container">
-            <a href="#" class="brand-logo" id="nav-title"><img src="assets/images/measuring-tape.png" alt="measure tape">You Are What You Eat!</a>
+            <a href="#" class="brand-logo" id="nav-title"><img src="assets/images/measuring-tape.png"
+                    alt="measure tape">You Are What You Eat!</a>
             <!-- Dont forget to change =========vvvvvv this bit of code from making login disappear -->
             <ul id="nav-mobile" class="right">
                 <li class="logged-out">
@@ -110,8 +111,17 @@
             </div>
         </div>
 
+        <table class="centered highlight responsive-table">
+            <thead>
+                <tr>
+                    <th>Ingredients</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
 
-       
+        <a class="waves-effect waves-light btn" id="ingrd-btn">Andy's Button</a>
 
 
 
@@ -154,17 +164,28 @@
             </div>
         </div>
 
-
-
-
-
-
         <!-- Firebase CDN -->
         <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js"></script>
         <!-- Firebase auth -->
         <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-auth.js"></script>
         <!-- Firebase database -->
         <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-database.js"></script>
+        
+        <!-- Fire base configuration: -->
+        <script>
+            var firebaseConfig = {
+                apiKey: "AIzaSyB_Iiy1X9SVcL0OD_NrA7zXwow1jxYFrAY",
+                authDomain: "project-1-254602.firebaseapp.com",
+                databaseURL: "https://project-1-254602.firebaseio.com",
+                projectId: "project-1-254602",
+                storageBucket: "",
+                messagingSenderId: "678978913542",
+                appId: "1:678978913542:web:4e7bb8259d61970316ca87"
+            };
+            // Initialize Firebase:
+            firebase.initializeApp(firebaseConfig);
+        </script>
+
         <!-- JQuery CDN -->
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <!-- Materialize CDN -->
