@@ -3,12 +3,36 @@
     background-color: blue;
 }
 
-.carousel {
-    background-image: url(../images/background-2277_1920.jpg);
-    background-size: cover;
-    opacity: .5;
+#nav-title {
+    color:tomato;
 }
 
-.carousel-item {
-    opacity: 0;
+#bg-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: url(../images/background-2277_1920.jpg);
+    background-size: cover;
+    z-index: -1;
+    opacity: .4;
+}
+
+#carousel-images {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+}
+
+#slide-out {
+    background-image: url(../images/organic-vegetables-1575584rs.jpg);
+}
+
+.collection-header {
+    color: white;
+    font-size: 24px;
 }
