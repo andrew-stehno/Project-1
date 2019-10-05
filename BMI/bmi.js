@@ -1,22 +1,21 @@
 
 // Your web app's Firebase configuration
+// var firebaseConfig = {
+//     apiKey: "AIzaSyCzDnBGcozOuVnT3J4RP4ckgXhG0hzHYu0",
+//     authDomain: "bodymassc.firebaseapp.com",
+//     databaseURL: "https://bodymassc.firebaseio.com",
+//     projectId: "bodymassc",
+//     storageBucket: "",
+//     messagingSenderId: "296683188310",
+//     appId: "1:296683188310:web:2432a2e488b7ef885e8bf7"
+// };
 
-var firebaseConfig = {
-    apiKey: "AIzaSyCzDnBGcozOuVnT3J4RP4ckgXhG0hzHYu0",
-    authDomain: "bodymassc.firebaseapp.com",
-    databaseURL: "https://bodymassc.firebaseio.com",
-    projectId: "bodymassc",
-    storageBucket: "",
-    messagingSenderId: "296683188310",
-    appId: "1:296683188310:web:2432a2e488b7ef885e8bf7"
-};
-
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+// // Initialize Firebase
+// firebase.initializeApp(firebaseConfig);
 
 var dataRef = firebase.database();
 
-// // Initial Values
+// Initial Values
 // var weight = 0;
 // var height = 0;
 // var age = 0;
@@ -63,6 +62,7 @@ $("#submit-btn").on("click", function (event) {
 
     // Code for the push
     dataRef.ref().push({
+        // database.ref().push({
 
         date_DB: date,
         weight_DB: weight,
@@ -75,6 +75,7 @@ $("#submit-btn").on("click", function (event) {
     });
 
     dataRef.ref().on("child_added", function (childSnapshot) {
+        // database.ref().on("child_added", function (childSnapshot) {
 
         var newRow = $("<tr>").append(
             $("<td>").text(childSnapshot.val().date),
