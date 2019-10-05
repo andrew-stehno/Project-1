@@ -216,12 +216,8 @@ for (let i = 0; i < optionsArr.length; i++) {
 
 $(document).on("click", ".keywordSearch", function () {
   var search = $('.keyWord').val().trim();
-<<<<<<< HEAD
-  var queryUrl = "https://api.edamam.com/search?q=" + search + "&app_id=$42a05216&app_key=$ddaf66796324f3322e79ef209fccf704"
-=======
   var dietParam = $('.dietParamSelector').val();
   var queryUrl = "https://api.edamam.com/search?q=" + search + "&app_id=$42a05216&app_key=$ddaf66796324f3322e79ef209fccf704&from=0&to=12"
->>>>>>> development
   console.log("clicked");
   console.log(search);
   console.log(dietParam);
@@ -232,11 +228,10 @@ $(document).on("click", ".keywordSearch", function () {
 
 
 
-<<<<<<< HEAD
 
-=======
+
+
   // ajax Call
->>>>>>> development
   $.ajax({
     url: queryUrl,
     method: "GET"
@@ -245,82 +240,12 @@ $(document).on("click", ".keywordSearch", function () {
 
     //  response variable:
     const data = response.hits;
-<<<<<<< HEAD
 
     // Iterate through ingredients:
     // ***Need click function associated with recipe index to
     // ***assign #1-10 for data[x] below.  Assigned as 1 for testing.
     for (let j = 0; j < data[1].recipe.ingredients.length; j++) {
       let ingrd = data[1].recipe.ingredients[j].food;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       
       let recipes;
 
@@ -342,14 +267,7 @@ $(document).on("click", ".keywordSearch", function () {
         database.ref().set(newData);
       })
     }
-    // let form = $('<form>');
-    // let label = $('<label>');
-    // let input = $('<input>').attr('type', 'checkbox').text(ingrd);
-    // label.append$(input);
-    // form.append$(label);
-
-  });
-=======
+  
     // console.log(data[1].recipe.image)
     // Iterate through ingredients:
     // ***Need click function associated with recipe index to
@@ -391,7 +309,6 @@ $(document).on("click", ".keywordSearch", function () {
     renderCards();
   });
 });
->>>>>>> development
 
 
 // API Key
