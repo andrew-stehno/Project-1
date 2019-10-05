@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Body Mass Calculator</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
+    <link rel="stylesheet" href="bmi.css">
+    <!-- Firebase References -->
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
+</head>
+
+<body>
+
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Add Employee  -->
+            <div class="card mb-4">
+                <div class="card-header">Boddy Mass Calculator</div>
+                <div class="card-body">
+                    <!-- Entry Form -->
+                    <form>
+                        <div class="form-group">
+                            <label for="wight-input">Weight (lb)</label>
+                            <input class="form-control" id="wight-input" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="heigh-input">Height (ft)</label>
+                            <input class="form-control" id="height-input" type="number">
+                        </div>
+                        <div class="form-group">
+                            <label for="age-input">Age</label>
+                            <input class="form-control" id="age-input" type="number">
+                        </div>
+                        <div class="form-group" id="gender-input">
+                            <input type="radio" name="gender" value="male"> Male<br>
+                            <input type="radio" name="gender" value="female"> Female<br>
+                        </div>
+                        <button class="btn btn-primary float-right" id="submit-btn">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+
+
+    <!-- JavaScript -->
+    <script src="bmi.js"></script>
+
+
+</body>
+
+</html>
