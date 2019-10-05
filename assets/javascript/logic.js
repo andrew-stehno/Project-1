@@ -246,28 +246,34 @@ $(document).on("click", ".keywordSearch", function () {
     // ***assign #1-10 for data[x] below.  Assigned as 1 for testing.
     for (let j = 0; j < data[1].recipe.ingredients.length; j++) {
       let ingrd = data[1].recipe.ingredients[j].food;
-      
-      let recipes;
+      console.log(ingrd);
 
-      // Click listener to display ingredients to DOM:
-      // $('.keyWordSearch').on(click, function (event) {
+      // Shopping List to DOM ***ingredients need a permament home on the DOM***
+      let newList = $('<li>').addClass('listItems').add('<label>');
+      let newInput =$('<input>').attr('type', 'checkbox').add('<span>').append(ingrd);
+      newList.append(newInput);
+      $('.ingredients').append(newList);
 
-      // })
+
 
       // Click listener to send data to Firebase:
       $('#ingrd-btn').on('click', function (event) {
         event.preventDefault();
 
+        // let ingredientList = $('.listItems').val();
+        // console.log(ingredientList);
+
         // Store API data in object:
         let newData = {
-          ingredients: [ingrd]
+          ingredients: ingrd
         }
 
         // Upload data to Firebase database:
         database.ref().set(newData);
       })
+
     }
-  
+
     // console.log(data[1].recipe.image)
     // Iterate through ingredients:
     // ***Need click function associated with recipe index to
@@ -292,8 +298,8 @@ $(document).on("click", ".keywordSearch", function () {
         var tabsUl = $('<ul class="tabs tabs-fixed-width">');
         var tabsList = $('<li class="tab">').add('<a>').attr('href', "google.com").text("hello")
         var content = $('<p>').text(data[i].recipe.label);
-        
-        
+
+
         tabsUl.append(tabsList)
         newDiv.append(tabsUl)
         title.append(content)
