@@ -1,0 +1,23 @@
+
+#db-chart {
+    padding: 200px;
+    margin: 50px;
+    background-color: aquamarine;
+}
+
+#card #bmi-table th, td {
+    display: inline-block;
+    width: 14%;
+}
+
+#ext-table {
+    margin:  10px 50px 10px 50px;
+}
+
+#headtext {
+    text-align: left;
+    float: left;
+    font-family: "Times New Roman";
+    font-size: 25px;
+    margin-left: 30px;
+}
