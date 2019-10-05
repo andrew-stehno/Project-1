@@ -249,12 +249,19 @@ $(document).on("click", ".keywordSearch", function () {
       console.log(ingrd);
 
       // Shopping List to DOM ***ingredients need a permament home on the DOM***
-      let newList = $('<li>').addClass('listItems').add('<label>');
-      let newInput =$('<input>').attr('type', 'checkbox').add('<span>').append(ingrd);
-      newList.append(newInput);
+      let newList = $('<li>').addClass('listItems');
+      let label = $('<label>');
+      let newInput =$('<input>').attr('type', 'checkbox');
+      let span = $('<span>').text(ingrd);
+      console.log(newInput,"newinput");
+      newList.append(label);
+      label.append(newInput);
+      label.append(span);
+      console.log(newList,"newlist");
       $('.ingredients').append(newList);
 
 
+      
 
       // Click listener to send data to Firebase:
       $('#ingrd-btn').on('click', function (event) {
@@ -281,13 +288,13 @@ $(document).on("click", ".keywordSearch", function () {
     for (let j = 0; j < data[j].recipe.ingredients.length; j++) {
       // let ingrd = data[1].recipe.ingredients[j].food;
       let url = data[j].recipe.url
-      console.log(url);
+      // console.log(url);
     }
     // Function to render cards, placed in ajax call for scoping. 
     function renderCards() {
       for (var i = 0; i < data.length; i++) {
         var recipeURL = data[i].recipe.url
-        console.log(recipeURL);
+        // console.log(recipeURL);
         var div = $('<div>').addClass('card');
         var title = $('<div>').addClass('card-title');
         // append .card-content to .card
@@ -299,7 +306,7 @@ $(document).on("click", ".keywordSearch", function () {
         var tabsList = $('<li class="tab">').add('<a>').attr('href', "google.com").text("hello")
         var content = $('<p>').text(data[i].recipe.label);
 
-
+        
         tabsUl.append(tabsList)
         newDiv.append(tabsUl)
         title.append(content)
