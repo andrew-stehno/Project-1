@@ -7,6 +7,8 @@ const database = firebase.database();
 auth.onAuthStateChanged(user => {
   if (user) {
     console.log('user logged in: ', user);
+    // Get user ID:
+    uid = user.uid;
   } else {
     console.log('user logged out');
   }

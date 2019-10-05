@@ -242,12 +242,14 @@ $(document).on("click", ".keywordSearch", function () {
 
     //  response variable:
     const data = response.hits;
-    console.log(data)
+    let ingrdArray=[]
+
     // Iterate through ingredients:
     // ***Need click function associated with recipe index to
     // ***assign #1-10 for data[x] below.  Assigned as 1 for testing.
     for (let j = 0; j < data[j].recipe.ingredients.length; j++) {
       let ingrd = data[j].recipe.ingredients[j].food;
+      ingrdArray.push(data[j].recipe.ingredients[j].food)
       console.log(ingrd);
 
       // Shopping List to DOM ***ingredients need a permament home on the DOM***
@@ -275,11 +277,14 @@ $(document).on("click", ".keywordSearch", function () {
 
         // Store API data in object:
         let newData = {
-          ingredients: ingrd
+          ingredients: ingrdArray,
+          userdata: "me"
         }
 
+
         // Upload data to Firebase database:
-        database.ref().set(newData);
+        database.ref(uid).set(newData);
+    
       })
 
     }
