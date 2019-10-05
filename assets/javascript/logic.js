@@ -242,12 +242,12 @@ $(document).on("click", ".keywordSearch", function () {
 
     //  response variable:
     const data = response.hits;
-
+    console.log(data)
     // Iterate through ingredients:
     // ***Need click function associated with recipe index to
     // ***assign #1-10 for data[x] below.  Assigned as 1 for testing.
-    for (let j = 0; j < data[1].recipe.ingredients.length; j++) {
-      let ingrd = data[1].recipe.ingredients[j].food;
+    for (let j = 0; j < data[j].recipe.ingredients.length; j++) {
+      let ingrd = data[j].recipe.ingredients[j].food;
       console.log(ingrd);
 
       // Shopping List to DOM ***ingredients need a permament home on the DOM***
@@ -255,13 +255,14 @@ $(document).on("click", ".keywordSearch", function () {
       let label = $('<label>');
       let newInput =$('<input>').attr('type', 'checkbox');
       let span = $('<span>').text(ingrd);
-      console.log(newInput,"newinput");
+      // console.log(newInput,"newinput");
       newList.append(label);
       label.append(newInput);
       label.append(span);
-      console.log(newList,"newlist");
-      $('.ingredients').append(newList);
-
+      // console.log(newList,"newlist");
+      // $('.ingredients').append(newList);
+      // div.append(newList);
+      
 
       
 
@@ -305,20 +306,24 @@ $(document).on("click", ".keywordSearch", function () {
         var img = $('<img src=" ' + data[i].recipe.image + ' " alt="Food Image">');
         var cardLinkDiv = $('<div>').addClass('card-action')
         var cardLink = $('<a>').attr({'href':recipeURL, target: '=_blank'}).text("Recipe");
-        // var tabsUl = $('<ul class="tabs tabs-fixed-width">');
-        // var tabsList = $('<li class="tab">').add('<a>').attr('href', "google.com").text("hello")
+        // var ingUl = $('<ul class="ing">');
+        // var ingList = $('<li class="ingList">').text(ingrd)
         var content = $('<p>').text(data[i].recipe.label);
-
-
-        // tabsUl.append(tabsList)
-        // newDiv.append(tabsUl)
+        for (let j = 0; j < data[i].recipe.ingredients.length; j++) {
+          console.log(data[i].recipe.ingredients[j].food);
+          
+          var ingrdContent = $('<p>').text(data[i].recipe.ingredients[j].food);
+          newDiv.append(ingrdContent);
+        }
         cardLinkDiv.append(cardLink)
         title.append(content)
         div.append(img)
         div.append(title)
         div.append(newDiv)
         div.append(cardLinkDiv)
-
+        // div.append(newList)
+        // ingUl.append(ingList)
+        // newDiv.append(ingUl)
         $('.cardArea').prepend(div);
 
       }
