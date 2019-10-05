@@ -197,11 +197,11 @@ $(document).ready(function () {
 });
 
 // makinf Array to hold dropdown menu items and looping through to dynamically create the options. 
-var optionsArr = ["Balanced", "Gluten-free", "Vegetarian", "Keto", "Paleo", "Vegan", "Pescetarian", "Dairy-free"]
+var optionsArr = ["balanced", "high-fiber", "high-protein", "low-carb", "low-fat", "low-sodium"]
 
 for (let i = 0; i < optionsArr.length; i++) {
   // test loop
-  console.log(optionsArr[i]);
+  // console.log(optionsArr[i]);
   // var that holds new options
   var newOpt = $('<option>')
 
@@ -221,8 +221,10 @@ $(document).on("click", ".keywordSearch", function () {
   console.log("clicked");
   console.log(search);
   console.log(dietParam);
-
-
+  if (dietParam !== null) {
+    queryUrl = "https://api.edamam.com/search?q=" + search + "&diet=" + dietParam + "&app_id=$42a05216&app_key=$ddaf66796324f3322e79ef209fccf704&from=0&to=12"
+  }
+  console.log(queryUrl);
   // reset search bar 
   $(".keyWord").val("");
 
@@ -257,18 +259,21 @@ $(document).on("click", ".keywordSearch", function () {
         var newDiv = $('<div>').addClass('card-content');
         // append img to card-content
         var img = $('<img src=" ' + data[i].recipe.image + ' " alt="Food Image">');
-        var tabs = $('<div>').addClass('card-tabs')
-        var tabsUl = $('<ul class="tabs tabs-fixed-width">');
-        var tabsList = $('<li class="tab">').add('<a>').attr('href', "google.com").text("hello")
+        var cardLinkDiv = $('<div>').addClass('card-action')
+        var cardLink = $('<a>').attr({'href':recipeURL, target: '=_blank'}).text("Recipe");
+        // var tabsUl = $('<ul class="tabs tabs-fixed-width">');
+        // var tabsList = $('<li class="tab">').add('<a>').attr('href', "google.com").text("hello")
         var content = $('<p>').text(data[i].recipe.label);
-        
-        
-        tabsUl.append(tabsList)
-        newDiv.append(tabsUl)
+
+
+        // tabsUl.append(tabsList)
+        // newDiv.append(tabsUl)
+        cardLinkDiv.append(cardLink)
         title.append(content)
         div.append(img)
         div.append(title)
         div.append(newDiv)
+        div.append(cardLinkDiv)
 
         $('.cardArea').prepend(div);
 
