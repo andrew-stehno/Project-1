@@ -16,66 +16,84 @@ firebase.initializeApp(firebaseConfig);
 
 var dataRef = firebase.database();
 
-
-// Initial Values
-var weight = 0;
-var height = 0;
-var age = 0;
-var gender = "";
+// // Initial Values
+// var weight = 0;
+// var height = 0;
+// var age = 0;
+// var gender = "";
 
 
 // Capture Button Click
 $("#submit-btn").on("click", function (event) {
     event.preventDefault();
 
+    date = $("#date-input").val().trim();
     weight = $("#wight-input").val().trim();
     height = $("#height-input").val().trim();
     age = $("#age-input").val().trim();
-    gender = $("#gender_input[value]").val();
+    gender = $("input[type=radio][name=gender]:checked").val();
+
+
+    console.log(date);
+    console.log(height);
+    console.log(age);
     console.log(gender);
+
 
     heightInc = height * 12;
 
-    var bmi = (weight / Math.pow(heightInc, 2)) * 703;
-    var bmit = bmi.toFixed(2);
+    var bmiC = (weight / Math.pow(heightInc, 2)) * 703;
+    bmi = bmiC.toFixed(2);
 
     // document.getElementById("demo").innerHTML = bmi;
 
-    if (gender === "femail") {
+    if (gender === "Female") {
 
         var bfpf = ((1.2 * bmi) + (0.23 * age)) - 5.4;
-        var bfpft = bfpf.toFixed(2);
-        bmi_db = bfpft
+        bfp = bfpf.toFixed(2);
 
     } else {
 
         var bfpm = ((1.2 * bmi) + (0.23 * age)) - 16.2;
-        var bfpmt = bfpm.toFixed(2);
-        bmi_db = bfpmt
-
+        bfp = bfpm.toFixed(2);
     }
 
-    // // Code for the push
-    // dataRef.ref().push({
+    console.log(bmi);
+    console.log(bfp);
 
-    //     weight_DB: weight,
-    //     heigh_DB: height,
-    //     age_DB: age,
-    //     genger_DB: gender,
-    //     BMI_DB: bmit,
-    //     BFP_DB: bmi_db,
+    // Code for the push
+    dataRef.ref().push({
+
+        date_DB: date,
+        weight_DB: weight,
+        heigh_DB: height,
+        age_DB: age,
+        gender_DB: gender,
+        BMI_DB: bmi,
+        BFP_DB: bfp,
+
+    });
+
+    dataRef.ref().on("child_added", function (childSnapshot) {
+
+        var newRow = $("<tr>").append(
+            $("<td>").text(childSnapshot.val().date),
+            $("<td>").text(childSnapshot.val().weight),
+            $("<td>").text(childSnapshot.val().hight),
+            $("<td>").text(childSnapshot.val().age),
+            $("<td>").text(childSnapshot.val().gender),
+            $("<td>").text(childSnapshot.val().bmi),
+            $("<td>").text(childSnapshot.val().bfp),
+        );
+        // Append the new row to the table
+        $("#bmi-table > tbody").append(newRow);
+    });
+
+    // Clears all of the text-boxes
+    $("#date-input").val("");
+    $("#wight-input").val("");
+    $("#height-input").val("");
+    $("#age-input").val("");
+    $("#gender-input").val("");
 
 });
-
-dataRef.ref().on("child_added", function (childSnapshot) {
-
-    // console.log(childSnapshot.val().weight);
-});
-
-// });
-
-// Clears all of the text-boxes
-$("#wight-input").val("");
-$("#height-input").val("");
-$("#age-input").val("");
-$("#gender-input").val("");
