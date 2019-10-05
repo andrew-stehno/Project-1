@@ -309,16 +309,10 @@ $(document).on("click", ".keywordSearch", function () {
         // var tabsList = $('<li class="tab">').add('<a>').attr('href', "google.com").text("hello")
         var content = $('<p>').text(data[i].recipe.label);
 
-<<<<<<< HEAD
-        
-        tabsUl.append(tabsList)
-        newDiv.append(tabsUl)
-=======
 
         // tabsUl.append(tabsList)
         // newDiv.append(tabsUl)
         cardLinkDiv.append(cardLink)
->>>>>>> tyler
         title.append(content)
         div.append(img)
         div.append(title)
