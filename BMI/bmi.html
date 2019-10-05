@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Body Mass Calculator</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- CSS File -->
+    <link rel="stylesheet" href="bmi.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="top-nav z-depth-0 grey lighten-4">
+
+        <div class="nav-wrapper container">
+            <!-- <a href="#" class="brand-logo" id="nav-title"><img src="/assets/images/measuring-tape.png"
+                    alt="measure tape">You -->
+            Are What You Eat!</a>
+            <!-- Dont forget to change =========vvvvvv this bit of code from making login disappear -->
+            <ul id="nav-mobile" class="right">
+                <li class="logged-out">
+                    <a href="#" class="grey-text modal-trigger" data-target="modal-login">Login</a>
+                </li>
+                <li class="logged-in">
+                    <a href="#" class="grey-text" id="logout">Logout</a>
+                </li>
+                <li class="logged-out">
+                    <a href="#" class="grey-text modal-trigger" data-target="modal-signup">Sign up</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- SIGN UP MODAL -->
+    <div id="modal-signup" class="modal">
+        <div class="modal-content">
+            <h4>Sign up</h4><br />
+            <form id="signup-form">
+                <div class="input-field">
+                    <input type="email" id="signup-email" required />
+                    <label for="signup-email">Email address</label>
+                </div>
+                <div class="input-field">
+                    <input type="password" id="signup-password" required />
+                    <label for="signup-password">Choose password</label>
+                </div>
+                <button class="btn yellow darken-2 z-depth-0">Sign up</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- LOGIN MODAL -->
+    <div id="modal-login" class="modal">
+        <div class="modal-content">
+            <h4>Login</h4><br />
+            <form id="login-form">
+                <div class="input-field">
+                    <input type="email" id="login-email" required />
+                    <label for="login-email">Email address</label>
+                </div>
+                <div class="input-field">
+                    <input type="password" id="login-password" required />
+                    <label for="login-password">Your password</label>
+                </div>
+                <button class="btn yellow darken-2 z-depth-0">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="chart" id="db-chart">Place for the Chart</div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Boddy Mass Index Calculator</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- Add Employee  -->
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <!-- Entry Form -->
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="date-input">Date</label>
+                                            <input class="form-control" id="date-input" type="date">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="wight-input">Weight (lb)</label>
+                                            <input class="form-control" id="wight-input" type="number">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="heigh-input">Height (ft)</label>
+                                            <input class="form-control" id="height-input" type="number">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="age-input">Age</label>
+                                            <input class="form-control" id="age-input" type="number">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="radio" name="gender" id="selectGender" value="Male">Male
+                                            <input type="radio" name="gender" id="selectGender" value="Female">Female
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="submit-btn">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="card" id="ext-table">
+        <div class="card-header">
+            <div id="headtext">
+                Data Table
+            </div>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#exampleModal">
+                Calculate your BMI
+            </button>
+
+        </div>
+        <div class="card-body" id="int-table">
+            <table class="table table-sm table-hover" id='bmi-table'>
+                <thead>
+                    <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Weight</th>
+                        <th scope="col">Height</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Genger</th>
+                        <th scope="col">BMI</th>
+                        <th scope="col">BFP</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Firebase CDN -->
+    <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js"></script>
+    <!-- Firebase auth -->
+    <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-auth.js"></script>
+    <!-- Firebase database -->
+    <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-database.js"></script>
+
+    <!-- Fire base configuration:
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyB_Iiy1X9SVcL0OD_NrA7zXwow1jxYFrAY",
+            authDomain: "project-1-254602.firebaseapp.com",
+            databaseURL: "https://project-1-254602.firebaseio.com",
+            projectId: "project-1-254602",
+            storageBucket: "",
+            messagingSenderId: "678978913542",
+            appId: "1:678978913542:web:4e7bb8259d61970316ca87"
+        };
+        // Initialize Firebase:
+        firebase.initializeApp(firebaseConfig);
+    </script> -->
+    <script>
+        // Your web app's Firebase configuration
+
+        var firebaseConfig = {
+            apiKey: "AIzaSyCzDnBGcozOuVnT3J4RP4ckgXhG0hzHYu0",
+            authDomain: "bodymassc.firebaseapp.com",
+            databaseURL: "https://bodymassc.firebaseio.com",
+            projectId: "bodymassc",
+            storageBucket: "",
+            messagingSenderId: "296683188310",
+            appId: "1:296683188310:web:2432a2e488b7ef885e8bf7"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+    </script>
+
+    <!-- JQuery CDN -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Materialize CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- External js & Firebase Sheet -->
+    <script src="../assets/javascript/firebase.js" type="text/javascript"></script>
+    <script src="../assets/javascript/logic.js" type="text/javascript"></script>
+    <!-- JavaScript -->
+    <script src="bmi.js"></script>
+
+</body>
+
+</html>
