@@ -21,13 +21,13 @@
                     alt="measure tape">You Are What You Eat!</a>
             <!-- Dont forget to change =========vvvvvv this bit of code from making login disappear -->
             <ul id="nav-mobile" class="right">
-                <li class="logged-out">
+                <li class="logged-out" style="display: none;">
                     <a href="#" class="grey-text modal-trigger" data-target="modal-login">Login</a>
                 </li>
-                <li class="logged-in">
+                <li class="logged-in" style="display: none;">
                     <a href="#" class="grey-text" id="logout">Logout</a>
                 </li>
-                <li class="logged-out">
+                <li class="logged-out" style="display: none;">
                     <a href="#" class="grey-text modal-trigger" data-target="modal-signup">Sign up</a>
                 </li>
             </ul>
@@ -108,12 +108,12 @@
         </div>
     </div>
 
-        <!-- Andy's test area -->
-        <div id="display">
-            <ul class="ingredients">
-            </ul>
-        </div>
-        <a class="waves-effect waves-light btn" id="ingrd-btn">button</a>
+    <!-- Andy's test area -->
+    <div id="display">
+        <ul class="ingredients">
+        </ul>
+    </div>
+    <a class="waves-effect waves-light btn" id="ingrd-btn">button</a>
 
     <!-- SIGN UP MODAL -->
     <div id="modal-signup" class="modal">
@@ -148,6 +148,14 @@
                 </div>
                 <button class="btn yellow darken-2 z-depth-0">Login</button>
             </form>
+        </div>
+
+        <!-- YOU MUST SIGN IN TO USE MODAL -->
+        <div id="modal-user" class="modal">
+            <div class="modal-content">
+                <h4>You must have an account to save content!</h4><br />
+            </div>
+            <button class="btn yellow darken-2 z-depth-0">Ok</button>
         </div>
 
         <!-- Firebase CDN -->
