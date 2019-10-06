@@ -242,7 +242,8 @@ $(document).on("click", ".keywordSearch", function () {
 
     //  response variable:
     const data = response.hits;
-    let ingrdArray = []
+    let ingrdArray = [];
+    let recipeArray = [];
 
     // Iterate through ingredients:
     // ***Need click function associated with recipe index to
@@ -276,7 +277,7 @@ $(document).on("click", ".keywordSearch", function () {
         // Store API data in object:
         newData = {
           ingredients: ingrdArray,
-          userdata: "me"
+          recipes: recipeArray
         }
 
         // Upload data to Firebase database:
