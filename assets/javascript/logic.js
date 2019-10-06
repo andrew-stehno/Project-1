@@ -303,7 +303,7 @@ $(document).on("click", ".keywordSearch", function () {
       for (var i = 0; i < data.length; i++) {
         var recipeURL = data[i].recipe.url
         // console.log(recipeURL);
-        var col = $('<div>').addClass('col m6 s12 l3');
+        var col = $('<div>').addClass('col m6 s12');
         var div = $('<div>').addClass('card sticky-action');
         var reveal = $('<div>').addClass('card-reveal');
         var icon = $('<a class="btn-floating waves-effect waves-light red"><i class="material-icons">bookmark</i></a>')
