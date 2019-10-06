@@ -1,6 +1,7 @@
-.ourBar {
-    width: 25%;
-    background-color: blue;
+
+.test {
+    background-color: #fff;
+    border-radius: 4px;
 }
 
 #nav-title {
@@ -17,6 +18,7 @@
     background-size: cover;
     z-index: -1;
     opacity: .4;
+    border-radius: 4px;
 }
 
 #carousel-images {
@@ -35,4 +37,8 @@
 .collection-header {
     color: white;
     font-size: 24px;
+}
+
+h1 {
+    font-weight: bolder;
 }
