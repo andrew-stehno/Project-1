@@ -319,7 +319,6 @@ $(document).on("click", ".keywordSearch", function () {
         var cardLinkDiv = $('<div>').addClass('card-action')
         var cardLink = $('<a>').attr({'href':recipeURL, target: '=_blank'}).text("Recipe");
         var heading = $('<p>').text("Ingredients: ");
-        // var ingList = $('<li class="ingList">').text(ingrd)
         // var content = $('<h1>').text(data[i].recipe.label);
         for (let j = 0; j < data[i].recipe.ingredients.length; j++) {
           console.log(data[i].recipe.ingredients[j].food);
@@ -341,7 +340,6 @@ $(document).on("click", ".keywordSearch", function () {
         div.append(reveal)
         col.append(div)
         // div.append(newList)
-        // ingUl.append(ingList)
         reveal.prepend(heading)
         // newDiv.prepend("Ingredients: ")
         $('.cardArea').prepend(col);
