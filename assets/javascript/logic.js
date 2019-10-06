@@ -242,7 +242,8 @@ $(document).on("click", ".keywordSearch", function () {
 
     //  response variable:
     const data = response.hits;
-    let ingrdArray=[]
+    let ingrdArray = [];
+    let recipeArray = [];
 
     // Iterate through ingredients:
     // ***Need click function associated with recipe index to
@@ -255,7 +256,7 @@ $(document).on("click", ".keywordSearch", function () {
       // Shopping List to DOM ***ingredients need a permament home on the DOM***
       let newList = $('<li>').addClass('listItems');
       let label = $('<label>');
-      let newInput =$('<input>').attr('type', 'checkbox');
+      let newInput = $('<input>').attr('type', 'checkbox');
       let span = $('<span>').text(ingrd);
       // console.log(newInput,"newinput");
       newList.append(label);
@@ -264,29 +265,25 @@ $(document).on("click", ".keywordSearch", function () {
       // console.log(newList,"newlist");
       // $('.ingredients').append(newList);
       // div.append(newList);
-      
 
-      
+
+      let newData;
 
       // Click listener to send data to Firebase:
       $('#ingrd-btn').on('click', function (event) {
         event.preventDefault();
 
-        // let ingredientList = $('.listItems').val();
-        // console.log(ingredientList);
 
         // Store API data in object:
-        let newData = {
+        newData = {
           ingredients: ingrdArray,
-          userdata: "me"
+          recipes: recipeArray
         }
-
 
         // Upload data to Firebase database:
         database.ref(uid).set(newData);
-    
-      })
 
+      })
     }
 
     // console.log(data[1].recipe.image)
@@ -317,12 +314,13 @@ $(document).on("click", ".keywordSearch", function () {
         // append img to card-content
         var img = $('<img src=" ' + data[i].recipe.image + ' " alt="Food Image">').addClass('activator');
         var cardLinkDiv = $('<div>').addClass('card-action')
-        var cardLink = $('<a>').attr({'href':recipeURL, target: '=_blank'}).text("Recipe");
-        var heading = $('<p>').text("Ingredients: ");
-        // var content = $('<h1>').text(data[i].recipe.label);
+        var cardLink = $('<a>').attr({ 'href': recipeURL, target: '=_blank' }).text("Recipe");
+        // var ingUl = $('<ul class="ing">');
+        // var ingList = $('<li class="ingList">').text(ingrd)
+        var content = $('<p>').text(data[i].recipe.label);
         for (let j = 0; j < data[i].recipe.ingredients.length; j++) {
           console.log(data[i].recipe.ingredients[j].food);
-          
+
           var ingrdContent = $('<p>').text(data[i].recipe.ingredients[j].food);
           reveal.append(ingrdContent);
         }
