@@ -1,26 +1,5 @@
 
-// Your web app's Firebase configuration
-// var firebaseConfig = {
-//     apiKey: "AIzaSyCzDnBGcozOuVnT3J4RP4ckgXhG0hzHYu0",
-//     authDomain: "bodymassc.firebaseapp.com",
-//     databaseURL: "https://bodymassc.firebaseio.com",
-//     projectId: "bodymassc",
-//     storageBucket: "",
-//     messagingSenderId: "296683188310",
-//     appId: "1:296683188310:web:2432a2e488b7ef885e8bf7"
-// };
-
-// // Initialize Firebase
-// firebase.initializeApp(firebaseConfig);
-
 var dataRef = firebase.database();
-
-// Initial Values
-// var weight = 0;
-// var height = 0;
-// var age = 0;
-// var gender = "";
-
 
 // Capture Button Click
 $("#submit-btn").on("click", function (event) {
@@ -31,12 +10,6 @@ $("#submit-btn").on("click", function (event) {
     height = $("#height-input").val().trim();
     age = $("#age-input").val().trim();
     gender = $("input[type=radio][name=gender]:checked").val();
-
-
-    console.log(date);
-    console.log(height);
-    console.log(age);
-    console.log(gender);
 
 
     heightInc = height * 12;
@@ -57,8 +30,75 @@ $("#submit-btn").on("click", function (event) {
         bfp = bfpm.toFixed(2);
     }
 
-    console.log(bmi);
-    console.log(bfp);
+    // Over or Under weight
+
+    if (gender === "Female") {
+        if (age <= 40) {
+            if (bfp <= 21) {
+                result = "Underfat";
+            } else if (bfp <= 33) {
+                result = "Healthy";
+            } else if (bfp <= 39) {
+                result = "Overweigh";
+            } else {
+                result = "Obese"
+            }
+        } else if (age <= 60) {
+            if (bfp <= 23) {
+                result = "Underfat";
+            } else if (bfp <= 35) {
+                result = "Healthy";
+            } else if (bfp <= 40) {
+                result = "Overweigh";
+            } else {
+                result = "Obese"
+            }
+        } else if (age <= 79) {
+            if (bfp <= 24) {
+                result = "Underfat";
+            } else if (bfp <= 36) {
+                result = "Healthy";
+            } else if (bfp <= 42) {
+                result = "Overweigh";
+            } else {
+                result = "Obese"
+            }
+        } else {
+            if (age <= 40) {
+                if (bfp <= 8) {
+                    result = "Underfat";
+                } else if (bfp <= 19) {
+                    result = "Healthy";
+
+                } else if (bfp <= 25) {
+                    result = "Overweigh";
+                } else {
+                    result = "Obese"
+                }
+            } else if (age <= 60) {
+                if (bfp <= 11) {
+                    result = "Underfat";
+                } else if (bfp <= 22) {
+                    result = "Healthy";
+
+                } else if (bfp <= 27) {
+                    result = "Overweigh";
+                } else {
+                    result = "Obese"
+                }
+            } else if (age <= 79) {
+                if (bfp <= 13) {
+                    result = "Underfat";
+                } else if (bfp <= 25) {
+                    result = "Healthy";
+                } else if (bfp <= 30) {
+                    result = "Overweigh";
+                } else {
+                    result = "Obese"
+                }
+            }
+        }
+    }
 
     // Code for the push
     dataRef.ref().push({
@@ -66,28 +106,13 @@ $("#submit-btn").on("click", function (event) {
 
         date_DB: date,
         weight_DB: weight,
-        heigh_DB: height,
+        height_DB: height,
         age_DB: age,
         gender_DB: gender,
         BMI_DB: bmi,
         BFP_DB: bfp,
+        result_DB: result,
 
-    });
-
-    dataRef.ref().on("child_added", function (childSnapshot) {
-        // database.ref().on("child_added", function (childSnapshot) {
-
-        var newRow = $("<tr>").append(
-            $("<td>").text(childSnapshot.val().date),
-            $("<td>").text(childSnapshot.val().weight),
-            $("<td>").text(childSnapshot.val().hight),
-            $("<td>").text(childSnapshot.val().age),
-            $("<td>").text(childSnapshot.val().gender),
-            $("<td>").text(childSnapshot.val().bmi),
-            $("<td>").text(childSnapshot.val().bfp),
-        );
-        // Append the new row to the table
-        $("#bmi-table > tbody").append(newRow);
     });
 
     // Clears all of the text-boxes
@@ -96,5 +121,21 @@ $("#submit-btn").on("click", function (event) {
     $("#height-input").val("");
     $("#age-input").val("");
     $("#gender-input").val("");
+});
 
+dataRef.ref().on("child_added", function (childSnapshot) {
+    // database.ref().on("child_added", function (childSnapshot) {
+
+    var newRow = $("<tr>").append(
+        $("<th>").text(childSnapshot.val().date_DB),
+        $("<th>").text(childSnapshot.val().weight_DB),
+        $("<th>").text(childSnapshot.val().height_DB),
+        $("<th>").text(childSnapshot.val().age_DB),
+        $("<th>").text(childSnapshot.val().gender_DB),
+        $("<th>").text(childSnapshot.val().BMI_DB),
+        $("<th>").text(childSnapshot.val().BFP_DB),
+        $("<th>").text(childSnapshot.val().result_DB),
+    );
+    // Append the new row to the table
+    $("#bmi-table > tbody").append(newRow);
 });
