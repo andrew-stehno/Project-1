@@ -227,7 +227,7 @@ $(document).on("click", ".keywordSearch", function () {
   console.log(queryUrl);
   // reset search bar 
   $(".keyWord").val("");
-
+  
 
 
 
@@ -303,34 +303,48 @@ $(document).on("click", ".keywordSearch", function () {
       for (var i = 0; i < data.length; i++) {
         var recipeURL = data[i].recipe.url
         // console.log(recipeURL);
-        var div = $('<div>').addClass('card');
-        var title = $('<div>').addClass('card-title');
+        var col = $('<div>').addClass('col m6 s12 l3');
+        var div = $('<div>').addClass('card sticky-action');
+        var reveal = $('<div>').addClass('card-reveal');
+        var icon = $('<a class="btn-floating waves-effect waves-light red"><i class="material-icons">bookmark</i></a>')
+        // var icon = $('<a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">bookmark</i></a>')
+        var title = $('<span>').addClass('card-title activator grey-text text-darken-4').text(data[i].recipe.label);
+        var secondTitle = $('<span>').addClass('card-title grey-text text-darken-4');
+        var closeout = $('<i>').addClass('material-icons right').text('close')
+        var image = $('<div>').addClass('card-image waves-effect waves-block waves-light');
         // append .card-content to .card
         var newDiv = $('<div>').addClass('card-content');
         // append img to card-content
-        var img = $('<img src=" ' + data[i].recipe.image + ' " alt="Food Image">');
+        var img = $('<img src=" ' + data[i].recipe.image + ' " alt="Food Image">').addClass('activator');
         var cardLinkDiv = $('<div>').addClass('card-action')
         var cardLink = $('<a>').attr({'href':recipeURL, target: '=_blank'}).text("Recipe");
-        // var ingUl = $('<ul class="ing">');
+        var heading = $('<p>').text("Ingredients: ");
         // var ingList = $('<li class="ingList">').text(ingrd)
-        var content = $('<p>').text(data[i].recipe.label);
+        // var content = $('<h1>').text(data[i].recipe.label);
         for (let j = 0; j < data[i].recipe.ingredients.length; j++) {
           console.log(data[i].recipe.ingredients[j].food);
           
           var ingrdContent = $('<p>').text(data[i].recipe.ingredients[j].food);
-          newDiv.append(ingrdContent);
+          reveal.append(ingrdContent);
         }
         cardLinkDiv.append(cardLink)
-        title.append(content)
-        div.append(img)
-        div.append(title)
+        cardLinkDiv.append(icon)
+        // title.append(content)
+        image.append(img)
+        // image.append(icon)
+        div.append(image)
+        secondTitle.prepend(closeout);
+        newDiv.append(title)
+        reveal.prepend(secondTitle);
         div.append(newDiv)
         div.append(cardLinkDiv)
+        div.append(reveal)
+        col.append(div)
         // div.append(newList)
         // ingUl.append(ingList)
-        // newDiv.append(ingUl)
-        $('.cardArea').prepend(div);
-
+        reveal.prepend(heading)
+        // newDiv.prepend("Ingredients: ")
+        $('.cardArea').prepend(col);
       }
     }
 
