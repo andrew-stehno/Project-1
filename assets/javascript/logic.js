@@ -269,7 +269,7 @@ $(document).on("click", ".keywordSearch", function () {
       // $('.ingredients').append(newList);
       // div.append(newList);
 
-      
+
 
 
     }
@@ -367,6 +367,21 @@ $(document).on("click", ".keywordSearch", function () {
         console.log(childSnapshot.val());
         console.log(childSnapshot.val().recipes);
         console.log(childSnapshot.val().ingredients);
+
+        // Post data to DOM:
+        const newRowFav = $("<tr>").append(
+          $("<td>").text(childSnapshot.val().recipes),
+        );
+        const newRowList = $("<tr>").append(
+          $("<td>").text(childSnapshot.val().indgredients)
+        )
+        // Append the new row to the table
+        $("#fav-table > tbody").append(newRowFav);
+        $("#list-table > tbody").append(newRowList);
+
+        //If errors occur:
+      }, function (errorObject) {
+        console.log("Errors handled: " + errorObject.code);
       });
 
     }
