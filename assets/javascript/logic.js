@@ -215,6 +215,7 @@ for (let i = 0; i < optionsArr.length; i++) {
 // create search var
 
 $(document).on("click", ".keywordSearch", function () {
+  event.preventDefault();
   var search = $('.keyWord').val().trim();
   var dietParam = $('.dietParamSelector').val();
   var queryUrl = "https://api.edamam.com/search?q=" + search + "&app_id=$42a05216&app_key=$ddaf66796324f3322e79ef209fccf704&from=0&to=12"
@@ -227,7 +228,7 @@ $(document).on("click", ".keywordSearch", function () {
   console.log(queryUrl);
   // reset search bar 
   $(".keyWord").val("");
-  
+
 
 
 
@@ -244,14 +245,16 @@ $(document).on("click", ".keywordSearch", function () {
     const data = response.hits;
     let ingrdArray = [];
     let recipeArray = [];
+    let newData;
+    const uid = database.uid;
 
-    // Iterate through ingredients:
-    // ***Need click function associated with recipe index to
-    // ***assign #1-10 for data[x] below.  Assigned as 1 for testing.
+    // Loop through API data for ingredients:
     for (let j = 0; j < data[j].recipe.ingredients.length; j++) {
       let ingrd = data[j].recipe.ingredients[j].food;
-      ingrdArray.push(data[j].recipe.ingredients[j].food)
-      console.log(ingrd);
+      ingrdArray.push(data[j].recipe.ingredients[j].food);
+      recipeArray.push(data[j].recipe.url);
+      // console.log(ingrd);
+      // console.log(recipeArray);
 
       // Shopping List to DOM ***ingredients need a permament home on the DOM***
       let newList = $('<li>').addClass('listItems');
@@ -266,30 +269,12 @@ $(document).on("click", ".keywordSearch", function () {
       // $('.ingredients').append(newList);
       // div.append(newList);
 
-
-      let newData;
-
-      // Click listener to send data to Firebase:
-      $('#ingrd-btn').on('click', function (event) {
-        event.preventDefault();
+      
 
 
-        // Store API data in object:
-        newData = {
-          ingredients: ingrdArray,
-          recipes: recipeArray
-        }
-
-        // Upload data to Firebase database:
-        database.ref(uid).set(newData);
-
-      })
     }
 
-    // console.log(data[1].recipe.image)
-    // Iterate through ingredients:
-    // ***Need click function associated with recipe index to
-    // ***assign #1-10 for data[x] below.  Assigned as 1 for testing.
+    // Loop through API data for ingredients:
     for (let j = 0; j < data[j].recipe.ingredients.length; j++) {
       // let ingrd = data[1].recipe.ingredients[j].food;
       let url = data[j].recipe.url
@@ -298,12 +283,12 @@ $(document).on("click", ".keywordSearch", function () {
     // Function to render cards, placed in ajax call for scoping. 
     function renderCards() {
       for (var i = 0; i < data.length; i++) {
-        var recipeURL = data[i].recipe.url
+        var recipeURL = data[i].recipe.url;
         // console.log(recipeURL);
-        var col = $('<div>').addClass('col m6 s12');
+        var col = $('<div>').addClass('col m6 s12 l3');
         var div = $('<div>').addClass('card sticky-action');
         var reveal = $('<div>').addClass('card-reveal');
-        var icon = $('<a class="btn-floating waves-effect waves-light red"><i class="material-icons">bookmark</i></a>')
+        var icon = $('<a class="btn-floating waves-effect waves-light red favorites"><i class="material-icons">bookmark</i></a>')
         // var icon = $('<a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">bookmark</i></a>')
         var title = $('<span>').addClass('card-title activator grey-text text-darken-4').text(data[i].recipe.label);
         var secondTitle = $('<span>').addClass('card-title grey-text text-darken-4');
@@ -317,10 +302,12 @@ $(document).on("click", ".keywordSearch", function () {
         var cardLink = $('<a>').attr({ 'href': recipeURL, target: '=_blank' }).text("Recipe");
         // var ingUl = $('<ul class="ing">');
         // var ingList = $('<li class="ingList">').text(ingrd)
-        var content = $('<p>').text(data[i].recipe.label);
+        var heading = $('<p>').text("Ingredients: ");
+        // var content = $('<p>').text(data[i].recipe.label);
         for (let j = 0; j < data[i].recipe.ingredients.length; j++) {
-          console.log(data[i].recipe.ingredients[j].food);
+          // console.log(data[i].recipe.ingredients[j].food);
 
+          recipeArray = [data[i].recipe.url];
           var ingrdContent = $('<p>').text(data[i].recipe.ingredients[j].food);
           reveal.append(ingrdContent);
         }
@@ -342,6 +329,46 @@ $(document).on("click", ".keywordSearch", function () {
         // newDiv.prepend("Ingredients: ")
         $('.cardArea').prepend(col);
       }
+
+      // Click listener to send data to Firebase:s
+      $('.favorites').on('click', function (event) {
+        event.preventDefault();
+
+
+        // Store API data in object:
+        newData = {
+          // ingredients: ingrdArray,
+          recipes: recipeArray
+        }
+
+        // Upload data to Firebase database:
+        database.ref(uid).push(newData);
+
+      });
+
+      // Click listener to send data to Firebase:s
+      $('#ingrd-btn').on('click', function (event) {
+        event.preventDefault();
+
+
+        // Store API data in object:
+        newData = {
+          // ingredients: ingrdArray,
+          ingredients: ingrdArray
+        }
+
+        // Upload data to Firebase database:
+        database.ref(uid).push(newData);
+
+      })
+
+      // Firebase listener:
+      database.ref(uid).on("child_added", function (childSnapshot) {
+        console.log(childSnapshot.val());
+        console.log(childSnapshot.val().recipes);
+        console.log(childSnapshot.val().ingredients);
+      });
+
     }
 
     renderCards();
