@@ -196,6 +196,21 @@ $(document).ready(function () {
   $('.sidenav').sidenav();
 });
 
+$('.carousel.carousel-slider').carousel({
+  fullWidth: true,
+  indicators: false
+});
+var autoplay = true;
+setInterval(function () {
+  if (autoplay) $('.carousel.carousel-slider').carousel('next');
+}, 4500);
+$('.carousel.carousel-slider').hover(function () {
+  autoplay = false;
+}, function () {
+  autoplay = true;
+});
+
+
 // makinf Array to hold dropdown menu items and looping through to dynamically create the options. 
 var optionsArr = ["balanced", "high-fiber", "high-protein", "low-carb", "low-fat", "low-sodium"]
 
@@ -227,7 +242,7 @@ $(document).on("click", ".keywordSearch", function () {
   console.log(queryUrl);
   // reset search bar 
   $(".keyWord").val("");
-  
+
 
 
 
@@ -242,7 +257,7 @@ $(document).on("click", ".keywordSearch", function () {
 
     //  response variable:
     const data = response.hits;
-    let ingrdArray=[]
+    let ingrdArray = []
 
     // Iterate through ingredients:
     // ***Need click function associated with recipe index to
@@ -255,7 +270,7 @@ $(document).on("click", ".keywordSearch", function () {
       // Shopping List to DOM ***ingredients need a permament home on the DOM***
       let newList = $('<li>').addClass('listItems');
       let label = $('<label>');
-      let newInput =$('<input>').attr('type', 'checkbox');
+      let newInput = $('<input>').attr('type', 'checkbox');
       let span = $('<span>').text(ingrd);
       // console.log(newInput,"newinput");
       newList.append(label);
@@ -264,9 +279,9 @@ $(document).on("click", ".keywordSearch", function () {
       // console.log(newList,"newlist");
       // $('.ingredients').append(newList);
       // div.append(newList);
-      
 
-      
+
+
 
       // Click listener to send data to Firebase:
       $('#ingrd-btn').on('click', function (event) {
@@ -284,7 +299,7 @@ $(document).on("click", ".keywordSearch", function () {
 
         // Upload data to Firebase database:
         database.ref(uid).set(newData);
-    
+
       })
 
     }
@@ -317,12 +332,15 @@ $(document).on("click", ".keywordSearch", function () {
         // append img to card-content
         var img = $('<img src=" ' + data[i].recipe.image + ' " alt="Food Image">').addClass('activator');
         var cardLinkDiv = $('<div>').addClass('card-action')
-        var cardLink = $('<a>').attr({'href':recipeURL, target: '=_blank'}).text("Recipe");
+        var cardLink = $('<a>').attr({
+          'href': recipeURL,
+          target: '=_blank'
+        }).text("Recipe");
         var heading = $('<p>').text("Ingredients: ");
         // var content = $('<h1>').text(data[i].recipe.label);
         for (let j = 0; j < data[i].recipe.ingredients.length; j++) {
           console.log(data[i].recipe.ingredients[j].food);
-          
+
           var ingrdContent = $('<p>').text(data[i].recipe.ingredients[j].food);
           reveal.append(ingrdContent);
         }
