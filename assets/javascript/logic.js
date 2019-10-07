@@ -5,190 +5,6 @@ document.addEventListener('DOMContentLoaded', function () {
   M.Modal.init(modals);
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Document.ready
 $(document).ready(function () {
   $('select').formSelect();
@@ -211,7 +27,6 @@ for (let i = 0; i < optionsArr.length; i++) {
 
 };
 
-
 // create search var
 
 $(document).on("click", ".keywordSearch", function () {
@@ -228,11 +43,6 @@ $(document).on("click", ".keywordSearch", function () {
   console.log(queryUrl);
   // reset search bar 
   $(".keyWord").val("");
-
-
-
-
-
 
   // ajax Call
   $.ajax({
@@ -255,23 +65,6 @@ $(document).on("click", ".keywordSearch", function () {
       recipeArray.push(data[j].recipe.url);
       // console.log(ingrd);
       // console.log(recipeArray);
-
-      // Shopping List to DOM ***ingredients need a permament home on the DOM***
-      let newList = $('<li>').addClass('listItems');
-      let label = $('<label>');
-      let newInput = $('<input>').attr('type', 'checkbox');
-      let span = $('<span>').text(ingrd);
-      // console.log(newInput,"newinput");
-      newList.append(label);
-      label.append(newInput);
-      label.append(span);
-      // console.log(newList,"newlist");
-      // $('.ingredients').append(newList);
-      // div.append(newList);
-
-
-
-
     }
 
     // Loop through API data for ingredients:
@@ -368,16 +161,27 @@ $(document).on("click", ".keywordSearch", function () {
         console.log(childSnapshot.val().recipes);
         console.log(childSnapshot.val().ingredients);
 
-        // Post data to DOM:
-        const newRowFav = $("<tr>").append(
-          $("<td>").text(childSnapshot.val().recipes),
-        );
-        const newRowList = $("<tr>").append(
-          $("<td>").text(childSnapshot.val().indgredients)
-        )
-        // Append the new row to the table
+        // Post recipes to favorites:
+        let newRowFav = $("<tr>");
+        let newRowFav1 = $('<td>');
+        let newRowFav2 = $('<a>').attr({href: ".text(childSnapshot.val().recipes)", target: "_blank"}).text(childSnapshot.val().recipes);
+        newRowFav1.append(newRowFav2);  
+        newRowFav.append(newRowFav1);
+        
+        // Post ingredients to shopping list:
+        let newList = $('<li>').addClass('listItems');
+        let label = $('<label>');
+        let newInput =$('<input>').attr('type', 'checkbox');
+        let span = $('<span>').text(childSnapshot.val().ingredients);
+        console.log(newInput,"newinput");
+        newList.append(label);
+        label.append(newInput);
+        label.append(span);
+        console.log(newList,"newlist");
+        
+        // Append the new rows table/list:
         $("#fav-table > tbody").append(newRowFav);
-        $("#list-table > tbody").append(newRowList);
+        $("#list-table").append(newList);
 
         //If errors occur:
       }, function (errorObject) {
@@ -398,3 +202,4 @@ $(document).on("click", ".keywordSearch", function () {
 // Example API Search URL
 // "https://api.edamam.com/search?q=chicken&app_id=${42a05216}&app_key=${ddaf66796324f3322e79ef209fccf704}&from=0&to=1&calories=591-722&health=alcohol-free"
 // + "&health=" + dietParam
+
