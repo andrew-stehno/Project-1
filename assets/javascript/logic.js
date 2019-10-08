@@ -195,20 +195,20 @@ $(document).ready(function () {
   $('.carousel').carousel();
   $('.sidenav').sidenav();
 });
-
-$('.carousel.carousel-slider').carousel({
-  fullWidth: true,
-  indicators: false
-});
+// $('.carousel').carousel({
+//   fullWidth: true,
+//   indicators: false
+// });
 var autoplay = true;
 setInterval(function () {
-  if (autoplay) $('.carousel.carousel-slider').carousel('next');
+  if (autoplay) $('.carousel').carousel('next');
 }, 4500);
-$('.carousel.carousel-slider').hover(function () {
+$('.carousel').hover(function () {
   autoplay = false;
 }, function () {
   autoplay = true;
 });
+
 
 
 // makinf Array to hold dropdown menu items and looping through to dynamically create the options. 
@@ -226,9 +226,10 @@ for (let i = 0; i < optionsArr.length; i++) {
 
 };
 
-
+var instance = $('select').formSelect();
 // create search var
-
+// console.log('instance', instance)
+// console.log('instance', instance.__proto__)
 $(document).on("click", ".keywordSearch", function () {
   var search = $('.keyWord').val().trim();
   var dietParam = $('.dietParamSelector').val();
@@ -242,6 +243,16 @@ $(document).on("click", ".keywordSearch", function () {
   console.log(queryUrl);
   // reset search bar 
   $(".keyWord").val("");
+  var selectField = document.querySelector('select')
+  resetSelectElement(selectField)
+  // console.log('instance', instance)
+  
+
+  // instance = undefined;
+  // setTimeout(() => {
+
+  //   instance = $('select').formSelect([]);
+  // }, 0)
 
 
 
@@ -362,17 +373,13 @@ $(document).on("click", ".keywordSearch", function () {
         // newDiv.prepend("Ingredients: ")
         $('.cardArea').prepend(col);
       }
+      $('select').formSelect();
     }
 
     renderCards();
   });
 });
 
-
-// API Key
-// https: //api.edamam.com/search?q=chicken?
-//     // ddaf66796324f3322e79ef209fccf704
-
-// Example API Search URL
-// "https://api.edamam.com/search?q=chicken&app_id=${42a05216}&app_key=${ddaf66796324f3322e79ef209fccf704}&from=0&to=1&calories=591-722&health=alcohol-free"
-// + "&health=" + dietParam
+function resetSelectElement(selectElement) {
+  selectElement.selectedIndex = 0; 
+}

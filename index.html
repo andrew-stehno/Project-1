@@ -18,8 +18,7 @@
     <nav>
         <div class="nav-wrapper">
             <div class="container">
-                <a href="#" data-target="slide-out" class="sidenav-trigger left"><i
-                        class="material-icons">menu</i></a>
+                <a href="#" data-target="slide-out" class="sidenav-trigger left"><i class="material-icons">menu</i></a>
                 <h1 class="brand-logo">You are what you eat!</h1>
             </div>
         </div>
@@ -60,18 +59,19 @@
     <a href="#" data-target="slide-out" class="sidenav-trigger waves-effect waves-light"><i
             class="material-icons">menu</i></a>
 
+    <!-- Carousel -->
     <div class="container test">
-        <!-- Carousel -->
-        <div class="carousel carousel-slider test s12">
+        <div class="carousel">
             <div id="bg-image"></div>
             <div class="carouselItems" id="carousel-images">
                 <a class="carousel-item"
                     href="https://www.epicurious.com/recipes/food/views/autumn-kale-salad-gefilte-manifesto-recipe"
                     target="_blank"><img
                         src="https://www.edamam.com/web-img/04d/04d5783764b9e3f9b8a00f5366074fb8.jpg"></a>
-                <a class="carousel-item" href="https://steamykitchen.com/14-negative-calorie-chocolate-cake.html"
+                <a class="carousel-item"
+                    href="https://www.loveandoliveoil.com/2009/12/vanilla-cake-with-tiramisu-buttercream-and-ganache-filling.html"
                     target="_blank"><img
-                        src="https://www.edamam.com/web-img/671/671e324a966aa55acf3db6191e51a08f.jpg"></a>
+                        src="https://www.edamam.com/web-img/d51/d512fed4f8c7ce4affcfdd41b96f4a67.jpg"></a>
                 <a class="carousel-item"
                     href="https://www.bonappetit.com/recipe/porcini-crusted-filet-mignon-with-fresh-herb-butter"
                     target="_blank"><img
@@ -84,32 +84,34 @@
                         src="https://www.edamam.com/web-img/50e/50e6b589f122ef2f3f6125d2bdfda981.jpg"></a>
             </div>
         </div>
+    </div>
 
 
-       
-        <div class="row">
-            <div class="col s12 m12">
-                <div class="card">
-                    <div class="card-content white-text">
-                        <form>
-                            <div class="input-field">
-                                <input id="search" class="keyWord"" type=" search" required>
-                                <!-- <label class="label-icon" for="search"><i class="material-icons">SEARCH</i></label> -->
-                                <!-- <i class="material-icons">close</i> -->
-                            </div>
-                            <a class="waves-effect waves-light btn keywordSearch">Search</a>
-                        </form>
-                    </div>
-                    <div class="input-field offset-m3">
-                        <select class="optionsField dietParamSelector">
-                            <option disabled selected>Choose your option</option>
-                        </select>
-                        <label>Diet Select</label>
-                    </div>
+    <div class="container">
+
+        <div class="searchArea">
+            <form>
+                <div class="input-field">
+                    <input id="search" class="keyWord" type="search" required>
+                    <!-- <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                    <i class="material-icons">close</i> -->
+                </div>
+                <a class="waves-effect waves-light btn keywordSearch">Search</a>
+            </form>
+        </div>
+        <div class="searchArea">
+            <div class="dietSelect">
+
+                <div class="input-field offset-m3">
+                    <select class="optionsField dietParamSelector">
+                        <option disabled selected>Choose your option</option>
+                    </select>
+                    <label>Diet Select</label>
                 </div>
             </div>
         </div>
-
+    </div>
+    <div class="container">
         <div class="recipeArea">
             <div class="row cardArea">
 
