@@ -4,12 +4,14 @@ const auth = firebase.auth();
 const database = firebase.database();
 const loggedOutLinks = document.querySelectorAll('.logged-out');
 const loggedInLinks = document.querySelectorAll('.logged-in');
-const uid = database.uid;
+let uid;
 
 // Listen for auth status change:
 auth.onAuthStateChanged(user => {
   if (user) {
     console.log('user logged in: ', user);
+    console.log('user uid' + user.uid);
+    uid = user.uid;
     // user interface function:
     setupUI(user);
   } else {

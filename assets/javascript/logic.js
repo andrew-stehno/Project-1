@@ -12,6 +12,7 @@ $(document).ready(function () {
   $('.sidenav').sidenav();
 });
 
+
 // makinf Array to hold dropdown menu items and looping through to dynamically create the options. 
 var optionsArr = ["balanced", "high-fiber", "high-protein", "low-carb", "low-fat", "low-sodium"]
 
@@ -56,7 +57,6 @@ $(document).on("click", ".keywordSearch", function () {
     let ingrdArray = [];
     let recipeArray = [];
     let newData;
-    const uid = database.uid;
 
     // Loop through API data for ingredients:
     for (let j = 0; j < data[j].recipe.ingredients.length; j++) {
@@ -82,6 +82,7 @@ $(document).on("click", ".keywordSearch", function () {
         var div = $('<div>').addClass('card sticky-action');
         var reveal = $('<div>').addClass('card-reveal');
         var icon = $('<a class="btn-floating waves-effect waves-light red favorites"><i class="material-icons">bookmark</i></a>')
+        icon.attr("data-link", recipeURL);
         // var icon = $('<a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">bookmark</i></a>')
         var title = $('<span>').addClass('card-title activator grey-text text-darken-4').text(data[i].recipe.label);
         var secondTitle = $('<span>').addClass('card-title grey-text text-darken-4');
@@ -122,23 +123,28 @@ $(document).on("click", ".keywordSearch", function () {
         // newDiv.prepend("Ingredients: ")
         $('.cardArea').prepend(col);
       }
-
+      let recipeUrl = [];
       // Click listener to send data to Firebase:s
       $('.favorites').on('click', function (event) {
         event.preventDefault();
 
-
         // Store API data in object:
+        recipeUrl.push($(this).attr('data-link'));
+        console.log(recipeUrl);
         newData = {
           // ingredients: ingrdArray,
-          recipes: recipeArray
+
+          recipes: recipeUrl,
+          
         }
 
         // Upload data to Firebase database:
-        database.ref(uid).push(newData);
+        console.log(newData);
+        database.ref(uid).update(newData);
+        
 
       });
-
+      let ingrdList = [];
       // Click listener to send data to Firebase:s
       $('#ingrd-btn').on('click', function (event) {
         event.preventDefault();
@@ -147,7 +153,8 @@ $(document).on("click", ".keywordSearch", function () {
         // Store API data in object:
         newData = {
           // ingredients: ingrdArray,
-          ingredients: ingrdArray
+          ingredients: ingrdArray,
+          
         }
 
         // Upload data to Firebase database:
@@ -155,38 +162,7 @@ $(document).on("click", ".keywordSearch", function () {
 
       })
 
-      // Firebase listener:
-      database.ref(uid).on("child_added", function (childSnapshot) {
-        console.log(childSnapshot.val());
-        console.log(childSnapshot.val().recipes);
-        console.log(childSnapshot.val().ingredients);
-
-        // Post recipes to favorites:
-        let newRowFav = $("<tr>");
-        let newRowFav1 = $('<td>');
-        let newRowFav2 = $('<a>').attr({href: ".text(childSnapshot.val().recipes)", target: "_blank"}).text(childSnapshot.val().recipes);
-        newRowFav1.append(newRowFav2);  
-        newRowFav.append(newRowFav1);
-        
-        // Post ingredients to shopping list:
-        let newList = $('<li>').addClass('listItems');
-        let label = $('<label>');
-        let newInput =$('<input>').attr('type', 'checkbox');
-        let span = $('<span>').text(childSnapshot.val().ingredients);
-        console.log(newInput,"newinput");
-        newList.append(label);
-        label.append(newInput);
-        label.append(span);
-        console.log(newList,"newlist");
-        
-        // Append the new rows table/list:
-        $("#fav-table > tbody").append(newRowFav);
-        $("#list-table").append(newList);
-
-        //If errors occur:
-      }, function (errorObject) {
-        console.log("Errors handled: " + errorObject.code);
-      });
+      
 
     }
 
