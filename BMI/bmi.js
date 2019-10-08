@@ -17,8 +17,6 @@ $("#submit-btn").on("click", function (event) {
     var bmiC = (weight / Math.pow(heightInc, 2)) * 703;
     bmi = bmiC.toFixed(2);
 
-    // document.getElementById("demo").innerHTML = bmi;
-
     if (gender === "Female") {
 
         var bfpf = ((1.2 * bmi) + (0.23 * age)) - 5.4;
@@ -126,6 +124,9 @@ $("#submit-btn").on("click", function (event) {
 dataRef.ref().on("child_added", function (childSnapshot) {
     // database.ref().on("child_added", function (childSnapshot) {
 
+    console.log(childSnapshot.val().date_DB);
+
+
     var newRow = $("<tr>").append(
         $("<th>").text(childSnapshot.val().date_DB),
         $("<th>").text(childSnapshot.val().weight_DB),
@@ -139,3 +140,44 @@ dataRef.ref().on("child_added", function (childSnapshot) {
     // Append the new row to the table
     $("#bmi-table > tbody").append(newRow);
 });
+
+// Chart
+
+// var chart_BMI = childSnapshot.val().BMI_DB
+// console.log(childSnapshot.val().BMI_DB);
+var chart_Date = ["a", "b", "c"]
+
+function float2dollar(value) {
+    return "U$ " + (value).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+}
+
+function renderChart(chart_BMI, chart_Date) {
+    var ctx = document.getElementById("myChart").getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: chart_Date,
+            datasets: [{
+                label: 'BMI',
+                data: chart_BMI,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        callback: function (value, index, values) {
+                            return float2dollar(value);
+                        }
+                    }
+                }]
+            }
+        },
+    });
+    $('#myChart').append(myChart);
+}
+renderChart();
+console.log("chart" + myChart);

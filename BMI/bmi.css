@@ -26,7 +26,12 @@
     text-align: center;
     font-family: "Times New Roman";
     font-size: 35px;
-    margin: 0px 50px 0px 50px;
-    padding: 5px;
-    
+    margin: 20px 50px 0px 50px;
+    padding: 5px;   
+}
+
+#myChart {
+        padding: 20px;
+        /* background-color: blue; */
+        margin: 10px 50px 0px 50px;
 }
