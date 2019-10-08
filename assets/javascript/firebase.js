@@ -2,13 +2,22 @@
 
 const auth = firebase.auth();
 const database = firebase.database();
+const loggedOutLinks = document.querySelectorAll('.logged-out');
+const loggedInLinks = document.querySelectorAll('.logged-in');
+let uid;
 
 // Listen for auth status change:
 auth.onAuthStateChanged(user => {
   if (user) {
     console.log('user logged in: ', user);
+    console.log('user uid' + user.uid);
+    uid = user.uid;
+    // user interface function:
+    setupUI(user);
   } else {
     console.log('user logged out');
+    // user interface function:
+    setupUI();
   }
 });
 
@@ -54,3 +63,18 @@ loginForm.addEventListener('submit', (e) => {
     signUpForm.reset();
   })
 });
+
+// UI setup:
+const setupUI = (user) => {
+  if (user) {
+    // toggle UI elements:
+    loggedInLinks.forEach(item => item.style.display = 'block');
+    loggedOutLinks.forEach(item => item.style.display = 'none');
+  } else {
+    // toggle UI elements:
+    loggedInLinks.forEach(item => item.style.display = 'none');
+    loggedOutLinks.forEach(item => item.style.display = 'block');
+
+  }
+};
+

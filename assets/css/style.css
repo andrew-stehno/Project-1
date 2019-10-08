@@ -38,3 +38,7 @@
     color: white;
     font-size: 24px;
 }
+
+h1 {
+    font-weight: bolder;
+}
