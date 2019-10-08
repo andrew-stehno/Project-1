@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Body Mass Calculator</title>
+    <!-- Materialize CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -28,8 +31,7 @@
         <div class="nav-wrapper container">
             <!-- <a href="#" class="brand-logo" id="nav-title"><img src="/assets/images/measuring-tape.png"
                     alt="measure tape">You -->
-            Are What You Eat!</a>
-            <!-- Dont forget to change =========vvvvvv this bit of code from making login disappear -->
+            <a href="#">You are What You Eat!</a>
             <ul id="nav-mobile" class="right">
                 <li class="logged-out">
                     <a href="#" class="grey-text modal-trigger" data-target="modal-login">Login</a>
@@ -44,10 +46,13 @@
         </div>
     </nav>
 
+    
+
     <!-- SIGN UP MODAL -->
     <div id="modal-signup" class="modal">
         <div class="modal-content">
-            <h4>Sign up</h4><br />
+            <h4 class="left">Sign up</h4>
+            <button class="btn grey lighten-1 z-depth-0 modal-close right">X</button><br>
             <form id="signup-form">
                 <div class="input-field">
                     <input type="email" id="signup-email" required />
@@ -58,6 +63,7 @@
                     <label for="signup-password">Choose password</label>
                 </div>
                 <button class="btn yellow darken-2 z-depth-0">Sign up</button>
+                <button class="btn grey lighten-1 z-depth-0 modal-close">Cancel</button>
             </form>
         </div>
     </div>
@@ -65,7 +71,8 @@
     <!-- LOGIN MODAL -->
     <div id="modal-login" class="modal">
         <div class="modal-content">
-            <h4>Login</h4><br />
+            <h4 class="left">Login</h4>
+            <button class="btn grey lighten-1 z-depth-0 modal-close right">X</button><br>
             <form id="login-form">
                 <div class="input-field">
                     <input type="email" id="login-email" required />
@@ -76,6 +83,7 @@
                     <label for="login-password">Your password</label>
                 </div>
                 <button class="btn yellow darken-2 z-depth-0">Login</button>
+                <button class="btn grey lighten-1 z-depth-0 modal-close">Cancel</button>
             </form>
         </div>
     </div>

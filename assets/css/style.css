@@ -16,6 +16,16 @@ body {
     background-image: url(../images/placeholder-salad.png);
 }
 
+.page2 {
+    background-image: url(../images/vegetables-1584999_1920.jpg);
+    background-size: cover; 
+}
+
+#logged {
+    font-size: 24px;
+    
+}
+
 #bg-image {
     position: absolute;
     top: 0;

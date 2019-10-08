@@ -8,59 +8,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Materialize CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body>
+<body class="page2">
     <!-- NAVBAR -->
-    <nav class="top-nav z-depth-0 grey lighten-4">
-
-        <div class="nav-wrapper container">
-            <a href="#" class="brand-logo" id="nav-title"><img src="assets/images/measuring-tape.png"
-                    alt="measure tape">You Are What You Eat!</a>
-            <ul id="nav-mobile" class="right">
-                <li class="logged-out">
-                    <a href="#" class="grey-text modal-trigger" data-target="modal-login">Login</a>
-                </li>
-                <li class="logged-in">
-                    <a href="#" class="grey-text" id="logout">Logout</a>
-                </li>
-                <li class="logged-out">
-                    <a href="#" class="grey-text modal-trigger" data-target="modal-signup">Sign up</a>
-                </li>
-            </ul>
+    <nav>
+        <div class="nav-wrapper">
+            <div class="container">
+                <a href="#" data-target="slide-out" class="sidenav-trigger left"><i class="material-icons">menu</i></a>
+                <h1 class="brand-logo">You are what you eat!</h1>
+            </div>
         </div>
     </nav>
 
-    <!--  -->
-    <div id="test"></div>
-    <div class="row">
-            <div class="col s12 center-align deep-orange">Add your selections to the Item List below:</div>
-            <div class="col s6 center-align">
-                <table class="centered" id="fav-table">
-                    <tbody>
-                        <tr>
-                            <th class="center-align">Favorites</th>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="col s6 center-align">
-                <ul id="list-table">
-                    <li class="center-align">Grocery List</li>
-                    <li>
-                        <label>
-                        </label>
+    <ul id="slide-out" class="sidenav">
+        <a class="sidenav-close" href="#!"><i class="material-icons">close</i></a>
+        <div class="user-view">
+            <ul id="nav-mobile">
+                <div class="collection">
+                    <li class="logged-out">
+                        <a href="#" class="collection-item modal-trigger" data-target="modal-login">Login</a>
                     </li>
-                </ul>
+                    <li class="logged-in">
+                        <a href="#" class="collection-item" id="logout">Logout</a>
+                    </li>
+                    <li class="logged-out">
+                        <a href="#" class="collection-item modal-trigger" data-target="modal-signup">Sign up</a>
+                    </li>
+                </div>
+                <div class="collection">
+                    <li>
+                        <a href="index.html" target="_blank" class="collection-item">Home</a>
+                    </li>
+                    <li>
+                        <a href="shopping.html" target="_blank" class="collection-item">Shopping List</a>
+                    </li>
+                    <li>
+                        <a href="BMI/bmi.html" target="_blank" class="collection-item">Body Mass Index</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="collection-item">Good things to come...</a>
+                    </li>
+                </div>
+            </ul>
+        </div>
+    </ul>
+    <div class="col s12 center-align deep-orange logged-out" style="display: none" id="logged">You must be logged in to save recipes
+        and create shopping lists.</div>
+    <a href="#" data-target="slide-out" class="sidenav-trigger waves-effect waves-light"><i
+            class="material-icons">menu</i></a>
+
+    <!--Favorite recipes-->
+    <div class="row">
+        <div class="col s12 m6">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title center-align">Favorite Recipes</span>
+                    <table class="centered logged-in" id="fav-table">
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-action">
+                </div>
             </div>
         </div>
+
+        <!-- Shopping List -->
+
+        <div class="col s12 m6">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title center-align">Shopping List</span>
+                    <ul class="logged-in" id="list-table">
+                        <li>
+                            <label>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-action">
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- SIGN UP MODAL -->
     <div id="modal-signup" class="modal">
         <div class="modal-content">
-            <h4>Sign up</h4><br />
+            <h4 class="left">Sign up</h4>
+            <button class="btn grey lighten-1 z-depth-0 modal-close right">X</button><br>
             <form id="signup-form">
                 <div class="input-field">
                     <input type="email" id="signup-email" required />
@@ -71,6 +111,7 @@
                     <label for="signup-password">Choose password</label>
                 </div>
                 <button class="btn yellow darken-2 z-depth-0">Sign up</button>
+                <button class="btn grey lighten-1 z-depth-0 modal-close">Cancel</button>
             </form>
         </div>
     </div>
@@ -78,7 +119,8 @@
     <!-- LOGIN MODAL -->
     <div id="modal-login" class="modal">
         <div class="modal-content">
-            <h4>Login</h4><br />
+            <h4 class="left">Login</h4>
+            <button class="btn grey lighten-1 z-depth-0 modal-close right">X</button><br>
             <form id="login-form">
                 <div class="input-field">
                     <input type="email" id="login-email" required />
@@ -89,6 +131,7 @@
                     <label for="login-password">Your password</label>
                 </div>
                 <button class="btn yellow darken-2 z-depth-0">Login</button>
+                <button class="btn grey lighten-1 z-depth-0 modal-close">Cancel</button>
             </form>
         </div>
     </div>
