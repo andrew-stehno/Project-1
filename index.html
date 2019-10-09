@@ -9,12 +9,12 @@
     <!-- Materialize CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
     <!-- NAVBAR -->
+
     <nav>
         <div class="nav-wrapper">
             <a href="#" data-target="slide-out" class="sidenav-trigger left show-on-large"><i
@@ -58,67 +58,86 @@
         </div>
     </ul>
 
+    <!-- test -->
+    <div class="parallax-container">
+        <!-- Carousel -->
 
-    <!-- Carousel -->
-    <div class="container test">
-        <div class="carousel">
-            <div id="bg-image"></div>
-            <div class="carouselItems" id="carousel-images">
-                <a class="carousel-item"
-                    href="https://www.epicurious.com/recipes/food/views/autumn-kale-salad-gefilte-manifesto-recipe"
-                    target="_blank"><img
-                        src="https://www.edamam.com/web-img/04d/04d5783764b9e3f9b8a00f5366074fb8.jpg"></a>
-                <a class="carousel-item"
-                    href="https://www.loveandoliveoil.com/2009/12/vanilla-cake-with-tiramisu-buttercream-and-ganache-filling.html"
-                    target="_blank"><img
-                        src="https://www.edamam.com/web-img/d51/d512fed4f8c7ce4affcfdd41b96f4a67.jpg"></a>
-                <a class="carousel-item"
-                    href="https://www.bonappetit.com/recipe/porcini-crusted-filet-mignon-with-fresh-herb-butter"
-                    target="_blank"><img
-                        src="https://www.edamam.com/web-img/99f/99f8920aeba9ce842b10936f5db4b0ce.jpg"></a>
-                <a class="carousel-item" href="https://www.epicurious.com/recipes/food/views/poached-eggs-236720"
-                    target="_blank"><img
-                        src="https://www.edamam.com/web-img/20f/20f0c2553240a2c6bc639d64df3f9df4.jpg"></a>
-                <a class="carousel-item" href="https://www.simplyrecipes.com/recipes/chicken_noodle_soup/"
-                    target="_blank"><img
-                        src="https://www.edamam.com/web-img/50e/50e6b589f122ef2f3f6125d2bdfda981.jpg"></a>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="container">
-
-        <div class="searchArea">
-            <form>
-                <div class="input-field">
-                    <input id="search" class="keyWord" type="search" required>
-                    <!-- <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                    <i class="material-icons">close</i> -->
-                </div>
-                <a class="waves-effect waves-light btn keywordSearch">Search</a>
-            </form>
-        </div>
-        <div class="searchArea">
-            <div class="dietSelect">
-
-                <div class="input-field offset-m3">
-                    <select class="optionsField dietParamSelector">
-                        <option disabled selected>Choose your option</option>
-                    </select>
-                    <label>Diet Select</label>
+        <div class="container test carouselCont">
+            <div class="carousel">
+                <div id="bg-image"></div>
+                <div class="carouselItems" id="carousel-images">
+                    <a class="carousel-item"
+                        href="https://www.epicurious.com/recipes/food/views/autumn-kale-salad-gefilte-manifesto-recipe"
+                        target="_blank">
+                        <img class="circle"
+                            src="https://www.edamam.com/web-img/04d/04d5783764b9e3f9b8a00f5366074fb8.jpg">
+                    </a>
+                    <a class="carousel-item"
+                        href="https://www.loveandoliveoil.com/2009/12/vanilla-cake-with-tiramisu-buttercream-and-ganache-filling.html"
+                        target="_blank">
+                        <img class="circle"
+                            src="https://www.edamam.com/web-img/d51/d512fed4f8c7ce4affcfdd41b96f4a67.jpg"></a>
+                    <a class="carousel-item"
+                        href="https://www.bonappetit.com/recipe/porcini-crusted-filet-mignon-with-fresh-herb-butter"
+                        target="_blank">
+                        <img class="circle"
+                            src="https://www.edamam.com/web-img/99f/99f8920aeba9ce842b10936f5db4b0ce.jpg"></a>
+                    <a class="carousel-item" href="https://www.epicurious.com/recipes/food/views/poached-eggs-236720"
+                        target="_blank">
+                        <img class="circle"
+                            src="https://www.edamam.com/web-img/20f/20f0c2553240a2c6bc639d64df3f9df4.jpg"></a>
+                    <a class="carousel-item" href="https://www.simplyrecipes.com/recipes/chicken_noodle_soup/"
+                        target="_blank">
+                        <img class="circle"
+                            src="https://www.edamam.com/web-img/50e/50e6b589f122ef2f3f6125d2bdfda981.jpg"></a>
                 </div>
             </div>
         </div>
+
+
+        <div class="parallax"><img src=".//assets/images/darker-board.png"></div>
+    </div>
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col s12">
+                    <div class="searchArea">
+                        <form>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="search" class="keyWord validate" type="search">
+                                    <label class="white-text" for="search">Search</label>
+                                    <a class="waves-effect waves-light btn keywordSearch right">Search</a>
+                                </div>
+                            </div>
+                            <div class="dietSelect col s12">
+                                <div class="input-field white-text">
+                                    <select class="optionsField dietParamSelector white-text">
+                                        <option disabled selected>Choose your option</option>
+                                    </select>
+                                    <label>Diet Select</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- Container end div -->
+        </div>
     </div>
     <div class="container">
-        <div class="recipeArea">
-            <div class="row cardArea">
+        <div class="row">
+            <div class="recipeArea">
+                <div class="cardArea">
 
+                </div>
             </div>
         </div>
     </div>
-
+    <!-- test -->
+    <div class="parallax-container">
+        <div class="parallax"><img src=".//assets/images/background-test.png"></div>
+    </div>
     <!-- SIGN UP MODAL -->
     <div id="modal-signup" class="modal">
         <div class="modal-content">

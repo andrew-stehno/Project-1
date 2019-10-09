@@ -10,11 +10,8 @@ $(document).ready(function () {
   $('select').formSelect();
   $('.carousel').carousel();
   $('.sidenav').sidenav();
+  $('.parallax').parallax();
 });
-// $('.carousel').carousel({
-//   fullWidth: true,
-//   indicators: false
-// });
 var autoplay = true;
 setInterval(function () {
   if (autoplay) $('.carousel').carousel('next');
