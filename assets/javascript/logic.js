@@ -91,7 +91,7 @@ $(document).on("click", ".keywordSearch", function () {
     function renderCards() {
       for (var i = 0; i < data.length; i++) {
           var recipeURL = data[i].recipe.url;
-          var ingrdLIST = [data[i].recipe.ingredients];
+          var ingrdLIST = JSON.stringify(data[i].recipe.ingredients.map(ingred => ingred.food));
           console.log(ingrdLIST);
           // console.log(recipeURL);
           var col = $('<div>').addClass('col m6 s12');
@@ -165,32 +165,24 @@ $(document).on("click", ".keywordSearch", function () {
 
       });
 
-      for (let k = 0; k < ingrdLIST.length; k++) {
-        let newIngrd = ingrdLIST[k];
-        for (let l = 0; l < newIngrd.length; l++) {
-          // console.log(newIngrd[l].food);
-          let listIngredients = newIngrd[l].food;
-          // console.log(listIngredients);
-        }
-      }
+    
       
       let ingrdList = [];
       // Click listener to send data to Firebase:s
       $('.save-list').on('click', function (event) {
         event.preventDefault();
-
+        let newIngredients = JSON.parse($(this).attr('data-link'));
 
         // Store API data in object:
-        // ingrdList.push($(this).attr('data-link'));
-        // console.log(ingrdList)
+        ingrdList.push($(this).attr('data-link'));
+        console.log(ingrdList)
         newData = {
-          // ingredients: ingrdArray,
-          ingredients: listIngredients,
+          ingredients: ingrdList,
 
         }
 
         // Upload data to Firebase database:
-        database.ref(uid).push(newData);
+        database.ref(uid).update(newData);
 
       })
 

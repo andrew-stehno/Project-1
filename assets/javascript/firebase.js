@@ -32,16 +32,13 @@ signUpForm.addEventListener('submit', (e) => {
 
   // Sign up user:
   auth.createUserWithEmailAndPassword(email, password).then(cred => {
-    return database('users').doc(cred.user.uid).set({
-      favorites: fav-table['user-fav'].value
-    });
+    // console.log(cred);
 
-  }).then(() => {
     const modal = document.querySelector('#modal-signup');
     M.Modal.getInstance(modal).close();
     signUpForm.reset();
-  });
-});
+  })
+})
 
 // Log user out:
 const logout = document.querySelector('#logout');
