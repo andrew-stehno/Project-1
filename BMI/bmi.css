@@ -10,7 +10,7 @@
 }
 
 #ext-table {
-    margin:  10px 50px 10px 50px;
+    margin:  10px 200px 10px 200px;
 }
 
 #headtext {
@@ -31,7 +31,6 @@
 }
 
 #myChart {
-        padding: 20px;
-        /* background-color: blue; */
-        margin: 10px 50px 0px 50px;
+    margin: 50%,
+      
 }
