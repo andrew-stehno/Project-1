@@ -5,198 +5,26 @@ document.addEventListener('DOMContentLoaded', function () {
   M.Modal.init(modals);
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Document.ready
 $(document).ready(function () {
   $('select').formSelect();
   $('.carousel').carousel();
   $('.sidenav').sidenav();
+  $('.parallax').parallax();
+});
+var autoplay = true;
+setInterval(function () {
+  if (autoplay) $('.carousel').carousel('next');
+}, 4500);
+$('.carousel').hover(function () {
+  autoplay = false;
+}, function () {
+  autoplay = true;
 });
 
-// makinf Array to hold dropdown menu items and looping through to dynamically create the options. 
+
+
+// making Array to hold dropdown menu items and looping through to dynamically create the options. 
 var optionsArr = ["balanced", "high-fiber", "high-protein", "low-carb", "low-fat", "low-sodium"]
 
 for (let i = 0; i < optionsArr.length; i++) {
@@ -211,10 +39,11 @@ for (let i = 0; i < optionsArr.length; i++) {
 
 };
 
+var instance = $('select').formSelect();
 
-// create search var
 
 $(document).on("click", ".keywordSearch", function () {
+  event.preventDefault();
   var search = $('.keyWord').val().trim();
   var dietParam = $('.dietParamSelector').val();
   var queryUrl = "https://api.edamam.com/search?q=" + search + "&app_id=$42a05216&app_key=$ddaf66796324f3322e79ef209fccf704&from=0&to=12"
@@ -227,11 +56,8 @@ $(document).on("click", ".keywordSearch", function () {
   console.log(queryUrl);
   // reset search bar 
   $(".keyWord").val("");
-  
-
-
-
-
+  var selectField = document.querySelector('select')
+  resetSelectElement(selectField)
 
   // ajax Call
   $.ajax({
@@ -242,92 +68,53 @@ $(document).on("click", ".keywordSearch", function () {
 
     //  response variable:
     const data = response.hits;
-    let ingrdArray=[]
-
-    // Iterate through ingredients:
-    // ***Need click function associated with recipe index to
-    // ***assign #1-10 for data[x] below.  Assigned as 1 for testing.
-    for (let j = 0; j < data[j].recipe.ingredients.length; j++) {
-      let ingrd = data[j].recipe.ingredients[j].food;
-      ingrdArray.push(data[j].recipe.ingredients[j].food)
-      console.log(ingrd);
-
-      // Shopping List to DOM ***ingredients need a permament home on the DOM***
-      let newList = $('<li>').addClass('listItems');
-      let label = $('<label>');
-      let newInput =$('<input>').attr('type', 'checkbox');
-      let span = $('<span>').text(ingrd);
-      // console.log(newInput,"newinput");
-      newList.append(label);
-      label.append(newInput);
-      label.append(span);
-      // console.log(newList,"newlist");
-      // $('.ingredients').append(newList);
-      // div.append(newList);
-      
-
-      
-
-      // Click listener to send data to Firebase:
-      $('#ingrd-btn').on('click', function (event) {
-        event.preventDefault();
-
-        // let ingredientList = $('.listItems').val();
-        // console.log(ingredientList);
-
-        // Store API data in object:
-        let newData = {
-          ingredients: ingrdArray,
-          userdata: "me"
-        }
+    let newData;
 
 
-        // Upload data to Firebase database:
-        database.ref(uid).set(newData);
-    
-      })
-
-    }
-
-    // console.log(data[1].recipe.image)
-    // Iterate through ingredients:
-    // ***Need click function associated with recipe index to
-    // ***assign #1-10 for data[x] below.  Assigned as 1 for testing.
-    for (let j = 0; j < data[j].recipe.ingredients.length; j++) {
-      // let ingrd = data[1].recipe.ingredients[j].food;
-      let url = data[j].recipe.url
-      // console.log(url);
-    }
     // Function to render cards, placed in ajax call for scoping. 
     function renderCards() {
       for (var i = 0; i < data.length; i++) {
-        var recipeURL = data[i].recipe.url
-        // console.log(recipeURL);
+        var recipeURL = data[i].recipe.url;
+        var ingrdLIST = JSON.stringify(data[i].recipe.ingredients.map(ingred => ingred.food));
         var col = $('<div>').addClass('col m6 s12');
         var div = $('<div>').addClass('card sticky-action');
         var reveal = $('<div>').addClass('card-reveal');
-        var icon = $('<a class="btn-floating waves-effect waves-light red"><i class="material-icons">bookmark</i></a>')
-        // var icon = $('<a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">bookmark</i></a>')
+        var icon = $('<a class="btn-floating waves-effect waves-light red favorites"><i class="material-icons">favorite</i></a>')
+        icon.attr("data-link", recipeURL);
+        var icon2 = $('<a class="btn-floating waves-effect waves-light red save-list right"><i class="material-icons">local_dining</i></a>')
+        icon2.attr("data-link", ingrdLIST);
         var title = $('<span>').addClass('card-title activator grey-text text-darken-4').text(data[i].recipe.label);
         var secondTitle = $('<span>').addClass('card-title grey-text text-darken-4');
         var closeout = $('<i>').addClass('material-icons right').text('close')
         var image = $('<div>').addClass('card-image waves-effect waves-block waves-light');
-        // append .card-content to .card
         var newDiv = $('<div>').addClass('card-content');
-        // append img to card-content
         var img = $('<img src=" ' + data[i].recipe.image + ' " alt="Food Image">').addClass('activator');
         var cardLinkDiv = $('<div>').addClass('card-action')
-        var cardLink = $('<a>').attr({'href':recipeURL, target: '=_blank'}).text("Recipe");
+        var cardLink = $('<a>').attr({
+          'href': recipeURL,
+          target: '=_blank'
+        }).text("Recipe");
         var heading = $('<p>').text("Ingredients: ");
-        // var content = $('<h1>').text(data[i].recipe.label);
+
+        cardContentIngrd();
+        cardAppend();
+      }
+
+      // Iterate through ingredients for card content:
+      function cardContentIngrd() {
         for (let j = 0; j < data[i].recipe.ingredients.length; j++) {
-          console.log(data[i].recipe.ingredients[j].food);
-          
+
+          recipeArray = [data[i].recipe.url];
           var ingrdContent = $('<p>').text(data[i].recipe.ingredients[j].food);
           reveal.append(ingrdContent);
         }
+      }
+
+      // Card append function:
+      function cardAppend() {
         cardLinkDiv.append(cardLink)
         cardLinkDiv.append(icon)
+        cardLinkDiv.append(icon2)
         // title.append(content)
         image.append(img)
         // image.append(icon)
@@ -344,17 +131,49 @@ $(document).on("click", ".keywordSearch", function () {
         // newDiv.prepend("Ingredients: ")
         $('.cardArea').prepend(col);
       }
+
+      $('select').formSelect();
+
+      // Click listener to send data to Firebase:s
+      let recipeUrl = [];
+      $('.favorites').on('click', function (event) {
+        event.preventDefault();
+
+        // Store API data in object:
+        recipeUrl.push($(this).attr('data-link'));
+        var ingredients = $(this).siblings('.save-list').attr('data-link');
+        console.log(recipeUrl);
+        newData = {
+          ingredients,
+          recipes: recipeUrl,
+        }
+
+        // Upload data to Firebase database:
+        database.ref(uid).update(newData);
+      });
+
+      // Click listener to send data to Firebase:s
+      let ingrdList = [];
+      $('.save-list').on('click', function (event) {
+        event.preventDefault();
+        let newIngredients = JSON.parse($(this).attr('data-link'));
+
+        // Store API data in object:
+        ingrdList.push($(this).attr('data-link'));
+        console.log(ingrdList)
+        newData = {
+          ingredients: ingrdList,
+
+        }
+        // Upload data to Firebase database:
+        database.ref(uid).update(newData);
+      })
     }
 
     renderCards();
   });
 });
 
-
-// API Key
-// https: //api.edamam.com/search?q=chicken?
-//     // ddaf66796324f3322e79ef209fccf704
-
-// Example API Search URL
-// "https://api.edamam.com/search?q=chicken&app_id=${42a05216}&app_key=${ddaf66796324f3322e79ef209fccf704}&from=0&to=1&calories=591-722&health=alcohol-free"
-// + "&health=" + dietParam
+function resetSelectElement(selectElement) {
+  selectElement.selectedIndex = 0;
+}

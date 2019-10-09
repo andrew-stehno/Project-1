@@ -6,80 +6,138 @@
     <title>Project 1</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- font -->
+    <link href="https://fonts.googleapis.com/css?family=Laila&display=swap" rel="stylesheet">
     <!-- Materialize CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="assets/css/reset.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body>
- <!-- NAVBAR -->
- <nav class="top-nav z-depth-0 grey lighten-4">
-
-        <div class="nav-wrapper container">
-            <a href="#" class="brand-logo" id="nav-title"><img src="assets/images/measuring-tape.png"
-                    alt="measure tape">You Are What You Eat!</a>
-            <!-- Dont forget to change =========vvvvvv this bit of code from making login disappear -->
-            <ul id="nav-mobile" class="right">
-                <li class="logged-out">
-                    <a href="#" class="grey-text modal-trigger" data-target="modal-login">Login</a>
-                </li>
-                <li class="logged-in">
-                    <a href="#" class="grey-text" id="logout">Logout</a>
-                </li>
-                <li class="logged-out">
-                    <a href="#" class="grey-text modal-trigger" data-target="modal-signup">Sign up</a>
-                </li>
-            </ul>
+<body class="page2">
+    <!-- NAVBAR -->
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" data-target="slide-out" class="sidenav-trigger left show-on-large"><i
+                    class="material-icons">menu</i></a>
+            <div class="container">
+                <a class="brand-logo">You are what you eat!</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li class="logged-out">
+                        <a href="#" class="collection-item modal-trigger" data-target="modal-login">Login</a>
+                    </li>
+                    <li class="logged-in">
+                        <a href="#" class="collection-item" id="logout">Logout</a>
+                    </li>
+                    <li class="logged-out">
+                        <a href="#" class="collection-item modal-trigger" data-target="modal-signup">Sign up</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
+    <!-- Side Nav -->
+    <ul id="slide-out" class="sidenav">
+        <a class="sidenav-close" href="#!"><i class="material-icons">close</i></a>
+        <div class="user-view">
+            <ul id="nav-mobile">
+                <div class="collection">
+                    <li>
+                        <a href="index.html" class="collection-item">Home</a>
+                    </li>
+                    <li>
+                        <a href="shopping.html" class="collection-item">Shopping List</a>
+                    </li>
+                    <li>
+                        <a href="BMI/bmi.html" class="collection-item">Body Mass Index</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="collection-item">Good things to come...</a>
+                    </li>
+                </div>
+            </ul>
+        </div>
+    </ul>
 
-    <div id="display">
-        <ul class="ingredients">
-            <li>
-                <label>
-                    <input type="checkbox" />
-                    <span>Red</span>
-                </label>
-            </li>
-        </ul>
+    <div class="col s12 center-align deep-orange logged-out" style="display: none" id="logged">You must be logged in to
+        save recipes
+        and create shopping lists.
+    </div>
+
+    <!--Favorite recipes-->
+    <div class="row">
+        <div class="col s12 m6">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title center-align">Favorite Recipes</span>
+                    <table class="centered logged-in" id="fav-table">
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-action">
+                </div>
+            </div>
+        </div>
+
+        <!-- Shopping List -->
+
+        <div class="col s12 m6">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title center-align">Shopping List</span>
+                    <ul class="logged-in" id="list-table">
+                        <li>
+                            <label>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-action">
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- SIGN UP MODAL -->
     <div id="modal-signup" class="modal">
-            <div class="modal-content">
-                <h4>Sign up</h4><br />
-                <form id="signup-form">
-                    <div class="input-field">
-                        <input type="email" id="signup-email" required />
-                        <label for="signup-email">Email address</label>
-                    </div>
-                    <div class="input-field">
-                        <input type="password" id="signup-password" required />
-                        <label for="signup-password">Choose password</label>
-                    </div>
-                    <button class="btn yellow darken-2 z-depth-0">Sign up</button>
-                </form>
-            </div>
+        <div class="modal-content">
+            <h4 class="left">Sign up</h4>
+            <button class="btn grey lighten-1 z-depth-0 modal-close right">X</button><br>
+            <form id="signup-form">
+                <div class="input-field">
+                    <input type="email" id="signup-email" required />
+                    <label for="signup-email">Email address</label>
+                </div>
+                <div class="input-field">
+                    <input type="password" id="signup-password" required />
+                    <label for="signup-password">Choose password</label>
+                </div>
+                <button class="btn yellow darken-2 z-depth-0">Sign up</button>
+                <button class="btn grey lighten-1 z-depth-0 modal-close">Cancel</button>
+            </form>
         </div>
+    </div>
 
-        <!-- LOGIN MODAL -->
-        <div id="modal-login" class="modal">
-            <div class="modal-content">
-                <h4>Login</h4><br />
-                <form id="login-form">
-                    <div class="input-field">
-                        <input type="email" id="login-email" required />
-                        <label for="login-email">Email address</label>
-                    </div>
-                    <div class="input-field">
-                        <input type="password" id="login-password" required />
-                        <label for="login-password">Your password</label>
-                    </div>
-                    <button class="btn yellow darken-2 z-depth-0">Login</button>
-                </form>
-            </div>
+    <!-- LOGIN MODAL -->
+    <div id="modal-login" class="modal">
+        <div class="modal-content">
+            <h4 class="left">Login</h4>
+            <button class="btn grey lighten-1 z-depth-0 modal-close right">X</button><br>
+            <form id="login-form">
+                <div class="input-field">
+                    <input type="email" id="login-email" required />
+                    <label for="login-email">Email address</label>
+                </div>
+                <div class="input-field">
+                    <input type="password" id="login-password" required />
+                    <label for="login-password">Your password</label>
+                </div>
+                <button class="btn yellow darken-2 z-depth-0">Login</button>
+                <button class="btn grey lighten-1 z-depth-0 modal-close">Cancel</button>
+            </form>
         </div>
+    </div>
 
     <!-- Firebase CDN -->
     <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js"></script>
@@ -90,18 +148,18 @@
 
     <!-- Fire base configuration: -->
     <script>
-            var firebaseConfig = {
-                apiKey: "AIzaSyB_Iiy1X9SVcL0OD_NrA7zXwow1jxYFrAY",
-                authDomain: "project-1-254602.firebaseapp.com",
-                databaseURL: "https://project-1-254602.firebaseio.com",
-                projectId: "project-1-254602",
-                storageBucket: "",
-                messagingSenderId: "678978913542",
-                appId: "1:678978913542:web:4e7bb8259d61970316ca87"
-            };
-            // Initialize Firebase:
-            firebase.initializeApp(firebaseConfig);
-        </script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyB_Iiy1X9SVcL0OD_NrA7zXwow1jxYFrAY",
+            authDomain: "project-1-254602.firebaseapp.com",
+            databaseURL: "https://project-1-254602.firebaseio.com",
+            projectId: "project-1-254602",
+            storageBucket: "",
+            messagingSenderId: "678978913542",
+            appId: "1:678978913542:web:4e7bb8259d61970316ca87"
+        };
+        // Initialize Firebase:
+        firebase.initializeApp(firebaseConfig);
+    </script>
 
     <!-- JQuery CDN -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -109,7 +167,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <!-- External js & Firebase Sheet -->
     <script src="assets/javascript/firebase.js" type="text/javascript"></script>
-    <script src="assets/javascript/logic.js" type="text/javascript"></script>
+    <!-- <script src="assets/javascript/logic.js" type="text/javascript"></script> -->
+    <script src="assets/javascript/shopping.js"></script>
 </body>
 
 </html>

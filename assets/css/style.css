@@ -1,13 +1,27 @@
-
+/* Body */
+body {
+    background-color: #fff;
+    font-family: 'Laila', serif;
+}
 .test {
     background-color: #fff;
     border-radius: 4px;
 }
 
-#nav-title {
-    color:tomato;
+/* carousel */
+.carousel {
+    height: 430px;
 }
 
+.carousel-item img {
+    width: 300px !important;
+    margin-left: -25%;
+    margin-top: -25%;
+}
+
+.carouselCont {
+    margin-top: 25px;
+}
 #bg-image {
     position: absolute;
     top: 0;
@@ -17,7 +31,7 @@
     background-image: url(../images/background-2277_1920.jpg);
     background-size: cover;
     z-index: -1;
-    opacity: .4;
+    opacity: .9;
     border-radius: 4px;
 }
 
@@ -30,6 +44,10 @@
     z-index: 1;
 }
 
+/* nav */
+.nav-wrapper {
+    background-color: #78aa00;
+}
 #slide-out {
     background-image: url(../images/organic-vegetables-1575584rs.jpg);
 }
@@ -39,6 +57,41 @@
     font-size: 24px;
 }
 
-h1 {
-    font-weight: bolder;
+/* form */
+.section,
+.row {
+    background-color: #78aa00;
+}
+
+.section {
+    border-bottom: 2px solid black;
+    border-top: 2px solid black;
+}
+.select-wrapper .input.select-dropdown .select-dropdown .dropdown-trigger {
+    border-bottom: 1px solid black;
+}
+
+.select-wrapper input.select-dropdown {
+    border-bottom: 1px solid black;
+}
+
+.row {
+    margin-bottom: 0px;
+}
+
+#search, .valid {
+    border-bottom: 1px solid black;
+    background-color: #78aa00;
+}
+
+
+
+.page2 {
+    background-image: url(../images/vegetables-1584999_1920.jpg);
+    background-size: cover;
+}
+
+#logged {
+    font-size: 24px;
+
 }
