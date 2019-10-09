@@ -68,81 +68,70 @@ $(document).on("click", ".keywordSearch", function () {
 
     //  response variable:
     const data = response.hits;
-    let ingrdArray = [];
-    let recipeArray = [];
     let newData;
 
-    // Loop through API data for ingredients:
-    // for (let j = 0; j < data[j].recipe.ingredients.length; j++) {
-    //   let ingrd = data[j].recipe.ingredients[j].food;
-    //   ingrdArray.push(data[j].recipe.ingredients[j].food);
-    //   recipeArray.push(data[j].recipe.url);
-    //   //  console.log(ingrd);
-    //   // console.log(recipeArray);
-    // }
 
-    // // Loop through API data for ingredients:
-    // for (let j = 0; j < data[j].recipe.ingredients.length; j++) {
-    //   // let ingrd = data[1].recipe.ingredients[j].food;
-    //   let url = data[j].recipe.url
-    //   // console.log(url);
-    // }
     // Function to render cards, placed in ajax call for scoping. 
     function renderCards() {
       for (var i = 0; i < data.length; i++) {
-          var recipeURL = data[i].recipe.url;
-          var ingrdLIST = JSON.stringify(data[i].recipe.ingredients.map(ingred => ingred.food));
-          console.log(ingrdLIST);
-          // console.log(recipeURL);
-          var col = $('<div>').addClass('col m6 s12');
-          var div = $('<div>').addClass('card sticky-action');
-          var reveal = $('<div>').addClass('card-reveal');
-          var icon = $('<a class="btn-floating waves-effect waves-light red favorites"><i class="material-icons">favorite</i></a>')
-          icon.attr("data-link", recipeURL,);
-          var icon2 = $('<a class="btn-floating waves-effect waves-light red save-list right"><i class="material-icons">local_dining</i></a>')
-          icon2.attr("data-link", ingrdLIST);
-          // var icon = $('<a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">bookmark</i></a>')
-          var title = $('<span>').addClass('card-title activator grey-text text-darken-4').text(data[i].recipe.label);
-          var secondTitle = $('<span>').addClass('card-title grey-text text-darken-4');
-          var closeout = $('<i>').addClass('material-icons right').text('close')
-          var image = $('<div>').addClass('card-image waves-effect waves-block waves-light');
-          // append .card-content to .card
-          var newDiv = $('<div>').addClass('card-content');
-          // append img to card-content
-          var img = $('<img src=" ' + data[i].recipe.image + ' " alt="Food Image">').addClass('activator');
-          var cardLinkDiv = $('<div>').addClass('card-action')
-          var cardLink = $('<a>').attr({
-            'href': recipeURL,
-            target: '=_blank'
-          }).text("Recipe");
-          var heading = $('<p>').text("Ingredients: ");
-          // var content = $('<p>').text(data[i].recipe.label);
-          for (let j = 0; j < data[i].recipe.ingredients.length; j++) {
-            // console.log(data[i].recipe.ingredients[j].food);
+        var recipeURL = data[i].recipe.url;
+        var ingrdLIST = JSON.stringify(data[i].recipe.ingredients.map(ingred => ingred.food));
+        var col = $('<div>').addClass('col m6 s12');
+        var div = $('<div>').addClass('card sticky-action');
+        var reveal = $('<div>').addClass('card-reveal');
+        var icon = $('<a class="btn-floating waves-effect waves-light red favorites"><i class="material-icons">favorite</i></a>')
+        icon.attr("data-link", recipeURL);
+        var icon2 = $('<a class="btn-floating waves-effect waves-light red save-list right"><i class="material-icons">local_dining</i></a>')
+        icon2.attr("data-link", ingrdLIST);
+        var title = $('<span>').addClass('card-title activator grey-text text-darken-4').text(data[i].recipe.label);
+        var secondTitle = $('<span>').addClass('card-title grey-text text-darken-4');
+        var closeout = $('<i>').addClass('material-icons right').text('close')
+        var image = $('<div>').addClass('card-image waves-effect waves-block waves-light');
+        var newDiv = $('<div>').addClass('card-content');
+        var img = $('<img src=" ' + data[i].recipe.image + ' " alt="Food Image">').addClass('activator');
+        var cardLinkDiv = $('<div>').addClass('card-action')
+        var cardLink = $('<a>').attr({
+          'href': recipeURL,
+          target: '=_blank'
+        }).text("Recipe");
+        var heading = $('<p>').text("Ingredients: ");
 
-            recipeArray = [data[i].recipe.url];
-            var ingrdContent = $('<p>').text(data[i].recipe.ingredients[j].food);
-            reveal.append(ingrdContent);
-          }
-          cardLinkDiv.append(cardLink)
-          cardLinkDiv.append(icon)
-          cardLinkDiv.append(icon2)
-          // title.append(content)
-          image.append(img)
-          // image.append(icon)
-          div.append(image)
-          secondTitle.prepend(closeout);
-          newDiv.append(title)
-          reveal.prepend(secondTitle);
-          div.append(newDiv)
-          div.append(cardLinkDiv)
-          div.append(reveal)
-          col.append(div)
-          // div.append(newList)
-          reveal.prepend(heading)
-          // newDiv.prepend("Ingredients: ")
-          $('.cardArea').prepend(col);
+        cardContentIngrd();
+        cardAppend();
+      }
+
+      // Iterate through ingredients for card content:
+      function cardContentIngrd() {
+        for (let j = 0; j < data[i].recipe.ingredients.length; j++) {
+
+          recipeArray = [data[i].recipe.url];
+          var ingrdContent = $('<p>').text(data[i].recipe.ingredients[j].food);
+          reveal.append(ingrdContent);
         }
+      }
+
+      // Card append function:
+      function cardAppend() {
+        cardLinkDiv.append(cardLink)
+        cardLinkDiv.append(icon)
+        cardLinkDiv.append(icon2)
+        // title.append(content)
+        image.append(img)
+        // image.append(icon)
+        div.append(image)
+        secondTitle.prepend(closeout);
+        newDiv.append(title)
+        reveal.prepend(secondTitle);
+        div.append(newDiv)
+        div.append(cardLinkDiv)
+        div.append(reveal)
+        col.append(div)
+        // div.append(newList)
+        reveal.prepend(heading)
+        // newDiv.prepend("Ingredients: ")
+        $('.cardArea').prepend(col);
+      }
+
       $('select').formSelect();
 
       // Click listener to send data to Firebase:s
@@ -157,17 +146,14 @@ $(document).on("click", ".keywordSearch", function () {
         newData = {
           ingredients,
           recipes: recipeUrl,
-
         }
 
         // Upload data to Firebase database:
-        database.ref(uid).push(newData);
-
+        database.ref(uid).update(newData);
       });
 
-    
-      
       // Click listener to send data to Firebase:s
+      let ingrdList = [];
       $('.save-list').on('click', function (event) {
         event.preventDefault();
         let newIngredients = JSON.parse($(this).attr('data-link'));
@@ -181,11 +167,7 @@ $(document).on("click", ".keywordSearch", function () {
         }
         // Upload data to Firebase database:
         database.ref(uid).update(newData);
-
       })
-
-
-
     }
 
     renderCards();
