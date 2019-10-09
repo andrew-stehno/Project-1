@@ -6,10 +6,11 @@
     <title>Project 1</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- font -->
+    <link href="https://fonts.googleapis.com/css?family=Laila&display=swap" rel="stylesheet">
     <!-- Materialize CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
@@ -17,18 +18,11 @@
     <!-- NAVBAR -->
     <nav>
         <div class="nav-wrapper">
+            <a href="#" data-target="slide-out" class="sidenav-trigger left show-on-large"><i
+                    class="material-icons">menu</i></a>
             <div class="container">
-                <a href="#" data-target="slide-out" class="sidenav-trigger left"><i class="material-icons">menu</i></a>
-                <h1 class="brand-logo">You are what you eat!</h1>
-            </div>
-        </div>
-    </nav>
-
-    <ul id="slide-out" class="sidenav">
-        <a class="sidenav-close" href="#!"><i class="material-icons">close</i></a>
-        <div class="user-view">
-            <ul id="nav-mobile">
-                <div class="collection">
+                <a class="brand-logo">You are what you eat!</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li class="logged-out">
                         <a href="#" class="collection-item modal-trigger" data-target="modal-login">Login</a>
                     </li>
@@ -38,16 +32,24 @@
                     <li class="logged-out">
                         <a href="#" class="collection-item modal-trigger" data-target="modal-signup">Sign up</a>
                     </li>
-                </div>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Side Nav -->
+    <ul id="slide-out" class="sidenav">
+        <a class="sidenav-close" href="#!"><i class="material-icons">close</i></a>
+        <div class="user-view">
+            <ul id="nav-mobile">
                 <div class="collection">
                     <li>
-                        <a href="index.html" target="_blank" class="collection-item">Home</a>
+                        <a href="index.html" class="collection-item">Home</a>
                     </li>
                     <li>
-                        <a href="shopping.html" target="_blank" class="collection-item">Shopping List</a>
+                        <a href="shopping.html" class="collection-item">Shopping List</a>
                     </li>
                     <li>
-                        <a href="BMI/bmi.html" target="_blank" class="collection-item">Body Mass Index</a>
+                        <a href="BMI/bmi.html" class="collection-item">Body Mass Index</a>
                     </li>
                     <li>
                         <a href="#!" class="collection-item">Good things to come...</a>
@@ -57,12 +59,10 @@
         </div>
     </ul>
 
-    <!-- <div class="col s12 center-align deep-orange logged-out" style="display: none" id="logged">You must be logged in to
+    <div class="col s12 center-align deep-orange logged-out" style="display: none" id="logged">You must be logged in to
         save recipes
-        and create shopping lists.</div> -->
-    <div id="non-user"></div>
-    <a href="#" data-target="slide-out" class="sidenav-trigger waves-effect waves-light"><i
-            class="material-icons">menu</i></a>
+        and create shopping lists.
+    </div>
 
     <!--Favorite recipes-->
     <div class="row">
