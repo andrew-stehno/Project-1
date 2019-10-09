@@ -32,13 +32,16 @@ signUpForm.addEventListener('submit', (e) => {
 
   // Sign up user:
   auth.createUserWithEmailAndPassword(email, password).then(cred => {
-    // console.log(cred);
+    return database('users').doc(cred.user.uid).set({
+      favorites: fav-table['user-fav'].value
+    });
 
+  }).then(() => {
     const modal = document.querySelector('#modal-signup');
     M.Modal.getInstance(modal).close();
     signUpForm.reset();
-  })
-})
+  });
+});
 
 // Log user out:
 const logout = document.querySelector('#logout');
@@ -74,7 +77,6 @@ const setupUI = (user) => {
     // toggle UI elements:
     loggedInLinks.forEach(item => item.style.display = 'none');
     loggedOutLinks.forEach(item => item.style.display = 'block');
-
   }
 };
 

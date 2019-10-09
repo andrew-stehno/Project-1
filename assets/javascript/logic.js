@@ -94,14 +94,14 @@ $(document).on("click", ".keywordSearch", function () {
     function renderCards() {
       for (var i = 0; i < data.length; i++) {
           var recipeURL = data[i].recipe.url;
-          var ingrdLIST;
+          var ingrdLIST = [data[i].recipe.ingredients];
           console.log(ingrdLIST);
           // console.log(recipeURL);
           var col = $('<div>').addClass('col m6 s12');
           var div = $('<div>').addClass('card sticky-action');
           var reveal = $('<div>').addClass('card-reveal');
           var icon = $('<a class="btn-floating waves-effect waves-light red favorites"><i class="material-icons">favorite</i></a>')
-          icon.attr("data-link", recipeURL);
+          icon.attr("data-link", recipeURL,);
           var icon2 = $('<a class="btn-floating waves-effect waves-light red save-list right"><i class="material-icons">local_dining</i></a>')
           icon2.attr("data-link", ingrdLIST);
           // var icon = $('<a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">bookmark</i></a>')
@@ -125,7 +125,6 @@ $(document).on("click", ".keywordSearch", function () {
 
             recipeArray = [data[i].recipe.url];
             var ingrdContent = $('<p>').text(data[i].recipe.ingredients[j].food);
-            ingrdLIST = ingrdContent;
             reveal.append(ingrdContent);
           }
           cardLinkDiv.append(cardLink)
@@ -165,23 +164,31 @@ $(document).on("click", ".keywordSearch", function () {
         }
 
         // Upload data to Firebase database:
-        console.log(newData);
         database.ref(uid).update(newData);
 
       });
 
-      // Click listener to send data to Firebase:s
+      for (let k = 0; k < ingrdLIST.length; k++) {
+        let newIngrd = ingrdLIST[k];
+        for (let l = 0; l < newIngrd.length; l++) {
+          // console.log(newIngrd[l].food);
+          let listIngredients = newIngrd[l].food;
+          // console.log(listIngredients);
+        }
+      }
+      
       let ingrdList = [];
+      // Click listener to send data to Firebase:s
       $('.save-list').on('click', function (event) {
         event.preventDefault();
 
 
         // Store API data in object:
-        ingrdList.push($(this).attr('data-link'));
-        console.log(ingrdList)
+        // ingrdList.push($(this).attr('data-link'));
+        // console.log(ingrdList)
         newData = {
           // ingredients: ingrdArray,
-          ingredients: ingrdList,
+          ingredients: listIngredients,
 
         }
 
