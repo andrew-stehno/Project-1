@@ -1,29 +1,58 @@
-
 .test {
     background-color: #fff;
     border-radius: 4px;
 }
 
-#nav-title {
-    color:tomato;
+
+.carousel {
+    height: 430px;
+}
+
+.carousel-item img {
+    width: 300px !important;
+    margin-left: -25%;
+    margin-top: -25%;
 }
 
 .nav-wrapper {
     background-color: #78aa00;
 }
 
-body {
-    background-image: url(../images/placeholder-salad.png);
+.section,
+.input-field,
+.row {
+    background-color: #78aa00;
 }
+
+.row {
+    margin-bottom: 0px;
+}
+
+/* .recipeArea {
+    margin-top: 25px;
+} */
+
+body {
+    /* background-image: url(../images/placeholder-salad.png); */
+    background-color: #fff;
+}
+
+.carouselCont {
+    margin-top: 25px;
+}
+
+/* .carousel-item {
+    height: 600px;
+} */
 
 .page2 {
     background-image: url(../images/vegetables-1584999_1920.jpg);
-    background-size: cover; 
+    background-size: cover;
 }
 
 #logged {
     font-size: 24px;
-    
+
 }
 
 #bg-image {
