@@ -73,20 +73,20 @@ $(document).on("click", ".keywordSearch", function () {
     let newData;
 
     // Loop through API data for ingredients:
-    for (let j = 0; j < data[j].recipe.ingredients.length; j++) {
-      let ingrd = data[j].recipe.ingredients[j].food;
-      ingrdArray.push(data[j].recipe.ingredients[j].food);
-      recipeArray.push(data[j].recipe.url);
-      //  console.log(ingrd);
-      // console.log(recipeArray);
-    }
+    // for (let j = 0; j < data[j].recipe.ingredients.length; j++) {
+    //   let ingrd = data[j].recipe.ingredients[j].food;
+    //   ingrdArray.push(data[j].recipe.ingredients[j].food);
+    //   recipeArray.push(data[j].recipe.url);
+    //   //  console.log(ingrd);
+    //   // console.log(recipeArray);
+    // }
 
-    // Loop through API data for ingredients:
-    for (let j = 0; j < data[j].recipe.ingredients.length; j++) {
-      // let ingrd = data[1].recipe.ingredients[j].food;
-      let url = data[j].recipe.url
-      // console.log(url);
-    }
+    // // Loop through API data for ingredients:
+    // for (let j = 0; j < data[j].recipe.ingredients.length; j++) {
+    //   // let ingrd = data[1].recipe.ingredients[j].food;
+    //   let url = data[j].recipe.url
+    //   // console.log(url);
+    // }
     // Function to render cards, placed in ajax call for scoping. 
     function renderCards() {
       for (var i = 0; i < data.length; i++) {
@@ -152,22 +152,21 @@ $(document).on("click", ".keywordSearch", function () {
 
         // Store API data in object:
         recipeUrl.push($(this).attr('data-link'));
+        var ingredients = $(this).siblings('.save-list').attr('data-link');
         console.log(recipeUrl);
         newData = {
-          // ingredients: ingrdArray,
-
+          ingredients,
           recipes: recipeUrl,
 
         }
 
         // Upload data to Firebase database:
-        database.ref(uid).update(newData);
+        database.ref(uid).push(newData);
 
       });
 
     
       
-      let ingrdList = [];
       // Click listener to send data to Firebase:s
       $('.save-list').on('click', function (event) {
         event.preventDefault();
@@ -180,7 +179,6 @@ $(document).on("click", ".keywordSearch", function () {
           ingredients: ingrdList,
 
         }
-
         // Upload data to Firebase database:
         database.ref(uid).update(newData);
 
