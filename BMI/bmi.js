@@ -39,7 +39,7 @@ $("#submit-btn").on("click", function (event) {
             } else if (bfp <= 39) {
                 result = "Overweigh";
             } else {
-                result = "Obese"
+                result = "Obese";
             }
         } else if (age <= 60) {
             if (bfp <= 23) {
@@ -49,9 +49,9 @@ $("#submit-btn").on("click", function (event) {
             } else if (bfp <= 40) {
                 result = "Overweigh";
             } else {
-                result = "Obese"
+                result = "Obese";
             }
-        } else if (age <= 79) {
+        } else (age <= 79); {
             if (bfp <= 24) {
                 result = "Underfat";
             } else if (bfp <= 36) {
@@ -59,44 +59,46 @@ $("#submit-btn").on("click", function (event) {
             } else if (bfp <= 42) {
                 result = "Overweigh";
             } else {
-                result = "Obese"
-            }
-        } else {
-            if (age <= 40) {
-                if (bfp <= 8) {
-                    result = "Underfat";
-                } else if (bfp <= 19) {
-                    result = "Healthy";
-
-                } else if (bfp <= 25) {
-                    result = "Overweigh";
-                } else {
-                    result = "Obese"
-                }
-            } else if (age <= 60) {
-                if (bfp <= 11) {
-                    result = "Underfat";
-                } else if (bfp <= 22) {
-                    result = "Healthy";
-
-                } else if (bfp <= 27) {
-                    result = "Overweigh";
-                } else {
-                    result = "Obese"
-                }
-            } else if (age <= 79) {
-                if (bfp <= 13) {
-                    result = "Underfat";
-                } else if (bfp <= 25) {
-                    result = "Healthy";
-                } else if (bfp <= 30) {
-                    result = "Overweigh";
-                } else {
-                    result = "Obese"
-                }
+                result = "Obese";
             }
         }
     }
+    else {
+        if (age <= 40) {
+            if (bfp <= 8) {
+                result = "Underfat";
+            } else if (bfp <= 19) {
+                result = "Healthy";
+
+            } else if (bfp <= 25) {
+                result = "Overweigh";
+            } else {
+                result = "Obese"
+            }
+        } else if (age <= 60) {
+            if (bfp <= 11) {
+                result = "Underfat";
+            } else if (bfp <= 22) {
+                result = "Healthy";
+
+            } else if (bfp <= 27) {
+                result = "Overweigh";
+            } else {
+                result = "Obese"
+            }
+        } else if (age <= 79) {
+            if (bfp <= 13) {
+                result = "Underfat";
+            } else if (bfp <= 25) {
+                result = "Healthy";
+            } else if (bfp <= 30) {
+                result = "Overweigh";
+            } else {
+                result = "Obese"
+            }
+        }
+    }
+
 
     // Code for the push
     dataRef.ref().push({
@@ -124,9 +126,6 @@ $("#submit-btn").on("click", function (event) {
 dataRef.ref().on("child_added", function (childSnapshot) {
     // database.ref().on("child_added", function (childSnapshot) {
 
-    console.log(childSnapshot.val().date_DB);
-
-
     var newRow = $("<tr>").append(
         $("<th>").text(childSnapshot.val().date_DB),
         $("<th>").text(childSnapshot.val().weight_DB),
@@ -141,43 +140,3 @@ dataRef.ref().on("child_added", function (childSnapshot) {
     $("#bmi-table > tbody").append(newRow);
 });
 
-// Chart
-
-// var chart_BMI = childSnapshot.val().BMI_DB
-// console.log(childSnapshot.val().BMI_DB);
-var chart_Date = ["a", "b", "c"]
-
-function float2dollar(value) {
-    return "U$ " + (value).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-}
-
-function renderChart(chart_BMI, chart_Date) {
-    var ctx = document.getElementById("myChart").getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: chart_Date,
-            datasets: [{
-                label: 'BMI',
-                data: chart_BMI,
-                borderColor: 'rgba(75, 192, 192, 1)',
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true,
-                        callback: function (value, index, values) {
-                            return float2dollar(value);
-                        }
-                    }
-                }]
-            }
-        },
-    });
-    $('#myChart').append(myChart);
-}
-renderChart();
-console.log("chart" + myChart);
