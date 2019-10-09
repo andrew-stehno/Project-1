@@ -73,25 +73,25 @@ $(document).on("click", ".keywordSearch", function () {
     let newData;
 
     // Loop through API data for ingredients:
-    for (let j = 0; j < data[j].recipe.ingredients.length; j++) {
-      let ingrd = data[j].recipe.ingredients[j].food;
-      ingrdArray.push(data[j].recipe.ingredients[j].food);
-      recipeArray.push(data[j].recipe.url);
-      //  console.log(ingrd);
-      // console.log(recipeArray);
-    }
+    // for (let j = 0; j < data[j].recipe.ingredients.length; j++) {
+    //   let ingrd = data[j].recipe.ingredients[j].food;
+    //   ingrdArray.push(data[j].recipe.ingredients[j].food);
+    //   recipeArray.push(data[j].recipe.url);
+    //   //  console.log(ingrd);
+    //   // console.log(recipeArray);
+    // }
 
-    // Loop through API data for ingredients:
-    for (let j = 0; j < data[j].recipe.ingredients.length; j++) {
-      // let ingrd = data[1].recipe.ingredients[j].food;
-      let url = data[j].recipe.url
-      // console.log(url);
-    }
+    // // Loop through API data for ingredients:
+    // for (let j = 0; j < data[j].recipe.ingredients.length; j++) {
+    //   // let ingrd = data[1].recipe.ingredients[j].food;
+    //   let url = data[j].recipe.url
+    //   // console.log(url);
+    // }
     // Function to render cards, placed in ajax call for scoping. 
     function renderCards() {
       for (var i = 0; i < data.length; i++) {
           var recipeURL = data[i].recipe.url;
-          var ingrdLIST = [data[i].recipe.ingredients];
+          var ingrdLIST = JSON.stringify(data[i].recipe.ingredients.map(ingred => ingred.food));
           console.log(ingrdLIST);
           // console.log(recipeURL);
           var col = $('<div>').addClass('col m6 s12');
@@ -152,16 +152,16 @@ $(document).on("click", ".keywordSearch", function () {
 
         // Store API data in object:
         recipeUrl.push($(this).attr('data-link'));
+        var ingredients = $(this).siblings('.save-list').attr('data-link');
         console.log(recipeUrl);
         newData = {
-          // ingredients: ingrdArray,
-
+          ingredients,
           recipes: recipeUrl,
 
         }
 
         // Upload data to Firebase database:
-        database.ref(uid).update(newData);
+        database.ref(uid).push(newData);
 
       });
 
@@ -174,21 +174,17 @@ $(document).on("click", ".keywordSearch", function () {
         }
       }
       
-      let ingrdList = [];
       // Click listener to send data to Firebase:s
       $('.save-list').on('click', function (event) {
         event.preventDefault();
-
+        var ingredients = JSON.parse($(this).attr('data-link'));
 
         // Store API data in object:
         // ingrdList.push($(this).attr('data-link'));
         // console.log(ingrdList)
         newData = {
-          // ingredients: ingrdArray,
-          ingredients: listIngredients,
-
+          ingredients,
         }
-
         // Upload data to Firebase database:
         database.ref(uid).push(newData);
 

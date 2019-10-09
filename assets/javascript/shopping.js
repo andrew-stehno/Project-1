@@ -51,6 +51,7 @@ function userAuth() {
   label.append(span);
   console.log(newList, "newlist");
   $("#list-table").append(newList);
+
 };
 
 function nonUser() {
