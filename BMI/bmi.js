@@ -17,8 +17,6 @@ $("#submit-btn").on("click", function (event) {
     var bmiC = (weight / Math.pow(heightInc, 2)) * 703;
     bmi = bmiC.toFixed(2);
 
-    // document.getElementById("demo").innerHTML = bmi;
-
     if (gender === "Female") {
 
         var bfpf = ((1.2 * bmi) + (0.23 * age)) - 5.4;
@@ -41,7 +39,7 @@ $("#submit-btn").on("click", function (event) {
             } else if (bfp <= 39) {
                 result = "Overweigh";
             } else {
-                result = "Obese"
+                result = "Obese";
             }
         } else if (age <= 60) {
             if (bfp <= 23) {
@@ -51,9 +49,9 @@ $("#submit-btn").on("click", function (event) {
             } else if (bfp <= 40) {
                 result = "Overweigh";
             } else {
-                result = "Obese"
+                result = "Obese";
             }
-        } else if (age <= 79) {
+        } else (age <= 79); {
             if (bfp <= 24) {
                 result = "Underfat";
             } else if (bfp <= 36) {
@@ -61,41 +59,42 @@ $("#submit-btn").on("click", function (event) {
             } else if (bfp <= 42) {
                 result = "Overweigh";
             } else {
+                result = "Obese";
+            }
+        }
+    }
+    else {
+        if (age <= 40) {
+            if (bfp <= 8) {
+                result = "Underfat";
+            } else if (bfp <= 19) {
+                result = "Healthy";
+
+            } else if (bfp <= 25) {
+                result = "Overweigh";
+            } else {
                 result = "Obese"
             }
-        } else {
-            if (age <= 40) {
-                if (bfp <= 8) {
-                    result = "Underfat";
-                } else if (bfp <= 19) {
-                    result = "Healthy";
+        } else if (age <= 60) {
+            if (bfp <= 11) {
+                result = "Underfat";
+            } else if (bfp <= 22) {
+                result = "Healthy";
 
-                } else if (bfp <= 25) {
-                    result = "Overweigh";
-                } else {
-                    result = "Obese"
-                }
-            } else if (age <= 60) {
-                if (bfp <= 11) {
-                    result = "Underfat";
-                } else if (bfp <= 22) {
-                    result = "Healthy";
-
-                } else if (bfp <= 27) {
-                    result = "Overweigh";
-                } else {
-                    result = "Obese"
-                }
-            } else if (age <= 79) {
-                if (bfp <= 13) {
-                    result = "Underfat";
-                } else if (bfp <= 25) {
-                    result = "Healthy";
-                } else if (bfp <= 30) {
-                    result = "Overweigh";
-                } else {
-                    result = "Obese"
-                }
+            } else if (bfp <= 27) {
+                result = "Overweigh";
+            } else {
+                result = "Obese"
+            }
+        } else if (age <= 79) {
+            if (bfp <= 13) {
+                result = "Underfat";
+            } else if (bfp <= 25) {
+                result = "Healthy";
+            } else if (bfp <= 30) {
+                result = "Overweigh";
+            } else {
+                result = "Obese"
             }
         }
     }
@@ -139,3 +138,4 @@ dataRef.ref().on("child_added", function (childSnapshot) {
     // Append the new row to the table
     $("#bmi-table > tbody").append(newRow);
 });
+
