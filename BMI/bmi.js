@@ -99,7 +99,6 @@ $("#submit-btn").on("click", function (event) {
         }
     }
 
-
     // Code for the push
     dataRef.ref().push({
         // database.ref().push({
