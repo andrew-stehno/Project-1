@@ -81,7 +81,7 @@ $(document).on("click", ".keywordSearch", function () {
         var reveal = $('<div>').addClass('card-reveal');
         var icon = $('<a class="btn-floating waves-effect waves-light red favorites"><i class="material-icons">favorite</i></a>')
         icon.attr("data-link", recipeURL);
-        var icon2 = $('<a class="btn-floating waves-effect waves-light red save-list right"><i class="material-icons">local_dining</i></a>')
+        var icon2 = $('<a class="btn-floating waves-effect waves-light red save-list right"><i class="material-icons" style="display: hidden">local_dining</i></a>')
         icon2.attr("data-link", ingrdLIST);
         var title = $('<span>').addClass('card-title activator grey-text text-darken-4').text(data[i].recipe.label);
         var secondTitle = $('<span>').addClass('card-title grey-text text-darken-4');
